@@ -1,0 +1,3 @@
+[submodule "librarys/XinlyCore"]
+	path = librarys/XinlyCore
+	url = git@27.155.88.94:xinly-android/XinlyCore.git
