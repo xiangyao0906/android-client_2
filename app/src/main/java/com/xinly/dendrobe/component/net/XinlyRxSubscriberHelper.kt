@@ -2,12 +2,13 @@ package com.xinly.dendrobe.component.net
 
 import android.content.Context
 import com.xinly.core.ext.yes
+import com.xinly.core.log.DLog
 import com.xinly.core.net.RxSubscriberHelper
 import com.xinly.core.net.exception.ApiException
 import com.xinly.core.net.exception.ExceptionEngine
+import com.xinly.core.utils.ThrowableUtil
 import com.xinly.dendrobe.component.data.ResultCode
 import io.reactivex.exceptions.CompositeException
-import retrofit2.HttpException
 
 /**
  * Created by zm on 2019-06-27.
@@ -26,7 +27,7 @@ abstract class XinlyRxSubscriberHelper<T>(context: Context? = null, isShowLoad: 
             onDismissLoad()
         }
 
-        when(apiException.status){
+        when(apiException.code){
             /**
              * 升级检查
              */
@@ -50,8 +51,8 @@ abstract class XinlyRxSubscriberHelper<T>(context: Context? = null, isShowLoad: 
         }
     }
 
-    private fun log(vararg messages: String) {
-
+    private fun log(messages: String) {
+        DLog.e("", messages)
     }
 
     /**
@@ -76,10 +77,6 @@ abstract class XinlyRxSubscriberHelper<T>(context: Context? = null, isShowLoad: 
     }
 
     private fun parseThrowable(throwable: Throwable) {
-        if (throwable is HttpException) {
-
-        }else{
-
-        }
+        DLog.e("", ThrowableUtil.getFullStackTrace(throwable))
     }
 }

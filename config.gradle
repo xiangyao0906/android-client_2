@@ -65,7 +65,11 @@ ext{
             // rxBinding
             "rxbinding-kotlin"          :   "com.jakewharton.rxbinding2:rxbinding-kotlin:$version.rxbinding-kotlin_verison",
             // 权限
-            "rxpermissions"             :   "com.github.tbruyelle:rxpermissions:0.10.2"
+            "rxpermissions"             :   "com.github.tbruyelle:rxpermissions:0.10.2",
+            // logger
+            "logger"                    :   "com.orhanobut:logger:2.2.0",
+            // toast
+            "DToast"                    :   "com.github.Dovar66:DToast:1.1.5"
     ]
 
     // kotlin 支持库
