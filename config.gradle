@@ -70,4 +70,29 @@ ext{
 
     // kotlin 支持库
     kotlin_stdlib_jdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version.kotlin_version"
+
+    host = [
+            /**
+             * DEV 开发环境
+             */
+            HOST_DEV  : 'http://192.168.0.121:8201',
+            /**
+             * RE 正式环境那
+             */
+            HOST_PROD : 'http://192.168.0.121:8201'
+    ]
+
+    /**
+     * 默认环境
+     */
+    host_default = host.HOST_DEV
+    /**
+     * release 生产环境
+     */
+    host_release = host.HOST_PROD
+
+    /**
+     * MD5盐
+     */
+    md5_salt = "BC4B2A76B9719D91"
 }

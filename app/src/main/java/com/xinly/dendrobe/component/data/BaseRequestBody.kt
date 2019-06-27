@@ -5,6 +5,8 @@ import com.xinly.core.data.protocol.BaseReq
 import com.xinly.core.utils.DeviceUtil
 import com.xinly.core.utils.EncryptUtils
 import com.xinly.core.utils.NetWorkUtils
+import com.xinly.dendrobe.component.net.TokenManager
+import com.xinly.dendrobe.model.constans.Constans
 
 /**
  * Created by zm on 2019-06-26.
@@ -20,7 +22,7 @@ class BaseRequestBody<T>(data: T) : BaseReq<T>(data){
 
     init {
         equip = EquipData()
-        sign = EncryptUtils.encryptMD5ToString("${equip.uuid}$time", "BC4B2A76B9719D91")
+        sign = EncryptUtils.encryptMD5ToString("${equip.uuid}${TokenManager.sToken}$time", Constans.MD5_SALT)
     }
 
     class EquipData{

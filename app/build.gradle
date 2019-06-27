@@ -16,10 +16,13 @@ android {
     }
     buildTypes {
         debug{
-
+            buildConfigField "String", "API_HOST", "\"${rootProject.ext.host_default}\""
+            buildConfigField "String", "MD5_SALT", "\"${rootProject.ext.md5_salt}\""
         }
 
         release {
+            buildConfigField "String", "API_HOST", "\"${rootProject.ext.host_release}\""
+            buildConfigField "String", "MD5_SALT", "\"${rootProject.ext.md5_salt}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

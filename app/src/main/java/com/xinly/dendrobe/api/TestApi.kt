@@ -4,9 +4,9 @@ import com.trello.rxlifecycle3.LifecycleProvider
 import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.convert
 import com.xinly.core.ext.execute
-import com.xinly.core.net.RequestManager
 import com.xinly.core.rx.BaseSubscriber
 import com.xinly.dendrobe.component.data.BaseRequestBody
+import com.xinly.dendrobe.component.net.XinlyRequestManager
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -24,7 +24,7 @@ class TestApi {
     private val api: Api
 
     init {
-        api = RequestManager.getRequest(Api::class.java, "http://192.168.0.121:8201")
+        api = XinlyRequestManager.getRequest(Api::class.java)
     }
 
     /**
