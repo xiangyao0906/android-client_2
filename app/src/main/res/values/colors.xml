@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#082125</color>
+    <color name="colorPrimaryDark">#082125</color>
+    <color name="colorAccent">#082125</color>
+
+    <!-- 灰色 -->
+    <color name="gray_light">#EAEAEA</color>
+    <color name="bg_normal">#f4f4f4</color>
+    <!-- 黑色 -->
+    <color name="bg_btn_black">#082125</color>
+
+    <!-- 字体 -->
+    <color name="font_black">#333333</color>
+    <color name="font_black_light">#666666</color>
+    <color name="font_gray">#999999</color>
+    <color name="font_gray_light">#CCCCCC</color>
+    <color name="font_blue_light">#228B9C</color>
 </resources>

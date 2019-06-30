@@ -9,7 +9,14 @@ object TokenManager {
     /**
      * 全局token
      */
-    var sToken: String = "ihihpkjojo"
+    var sToken: String = ""
         private set
 
+    /**
+     * 更新Token
+     * @param token
+     */
+    fun updateToken(token: String) {
+        sToken = token
+    }
 }

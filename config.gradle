@@ -27,7 +27,7 @@ ext{
             "rxAndroid_version"         :   "2.1.1",
             "arouter_api_version"       :   "1.4.1",
             "arouter_compiler_version"  :   "1.2.2",
-            "rxbinding-kotlin_verison"  :   "2.1.1",
+            "rxbinding_kotlin_verison"  :   "2.1.1",
             "rxlifecycleSdkVersion"     :   "3.0.0"
     ]
 
@@ -63,7 +63,7 @@ ext{
             "glide-okhttp"              :   "com.github.bumptech.glide:okhttp3-integration:$version.glide_version",
             "glide-compiler"            :   "com.github.bumptech.glide:compiler:$version.glide_version",
             // rxBinding
-            "rxbinding-kotlin"          :   "com.jakewharton.rxbinding2:rxbinding-kotlin:$version.rxbinding-kotlin_verison",
+            "rxbinding-kotlin"          :   "com.jakewharton.rxbinding2:rxbinding-kotlin:$version.rxbinding_kotlin_verison",
             // 权限
             "rxpermissions"             :   "com.github.tbruyelle:rxpermissions:0.10.2",
             // logger
@@ -79,11 +79,11 @@ ext{
             /**
              * DEV 开发环境
              */
-            HOST_DEV  : 'http://192.168.0.121:8201',
+            HOST_DEV  : 'http://app.dendrobe.btp38.com/',
             /**
              * RE 正式环境那
              */
-            HOST_PROD : 'http://192.168.0.121:8201'
+            HOST_PROD : 'http://192.168.0.121:8201/'
     ]
 
     /**
