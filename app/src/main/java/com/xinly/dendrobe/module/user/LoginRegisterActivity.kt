@@ -1,4 +1,4 @@
-package com.xinly.dendrobe.module.login
+package com.xinly.dendrobe.module.user
 
 import android.os.Bundle
 import com.xinly.core.ui.activity.BaseActivity

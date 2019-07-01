@@ -1,4 +1,4 @@
-package com.xinly.dendrobe.module.register
+package com.xinly.dendrobe.module.user
 
 import android.Manifest
 import android.annotation.SuppressLint

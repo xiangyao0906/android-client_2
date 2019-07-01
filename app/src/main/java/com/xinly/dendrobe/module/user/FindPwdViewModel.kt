@@ -1,35 +1,32 @@
-package com.xinly.dendrobe.module.register
+package com.xinly.dendrobe.module.user
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.databinding.ObservableBoolean
+import android.os.Bundle
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.show
-import com.xinly.core.ext.yes
+import com.xinly.core.ext.showAtCenter
 import com.xinly.core.rx.BaseSubscriber
-import com.xinly.core.utils.EncryptUtils
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.api.SystemApi
 import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
-import com.xinly.dendrobe.component.net.TokenManager
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
-import com.xinly.dendrobe.model.vo.result.RegisterData
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.ResponseBody
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by zm on 2019-06-28.
+ * Created by zm on 2019-07-01.
  */
-class RegisterViewModel(application: Application) : BaseToolBarViewModel(application) {
+class FindPwdViewModel(application: Application): BaseToolBarViewModel(application) {
     //账号绑定
     val accountName = ObservableField<String>()
     val accountHint = ObservableField<String>()
@@ -41,19 +38,8 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
     val verifCode = ObservableField<String>()
     val verifBtnText = ObservableField<String>()
     val verifBtnEnabled = ObservableField<Boolean>()
-    //登陆密码
-    val passWord = ObservableField("")
-    //推荐人ID
-    val recommendId = ObservableField("")
-    //是否同意用户协议
-    val agree = ObservableBoolean(false)
-
-    //封装一个界面发生改变的观察者
-    val uic:  UIChangeObservable = UIChangeObservable()
-    class UIChangeObservable {
-        //注册方式 0手机注册 1邮箱注册
-        val regType = ObservableInt(0)
-    }
+    //切换找回密码方式
+    val switchFindPwdText by lazy { ObservableField<String>() }
 
     override fun onCreate() {
         super.onCreate()
@@ -66,21 +52,19 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
         imgCodeBmp.get()?.recycle()
     }
 
-    //event
-    override fun handRightText() {
-        uic.regType.set(if (uic.regType.get() == 0) 1 else 0)
-        showData()
+    //封装一个界面发生改变的观察者
+    val uic: UIChangeObservable = UIChangeObservable()
+    class UIChangeObservable {
+        //找回类型 0手机找回 1邮箱找回
+        val findType = ObservableInt(0)
     }
-    // 注册事件
-    val goRegisterClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
-        override fun call() {
-            next()
-        }
-    })
+
+    //event
+    // 登陆
     // 发送验证码事件
     val sendCodeClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-            senCode()
+            sendCode()
         }
     })
     // 刷新图形码事件
@@ -89,61 +73,55 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
             requestImgCode()
         }
     })
-    // 查看用户协议
-    val agreementClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
+    // 切换找回密码方式
+    val switchClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-           "查看用户协议".show()
+            uic.findType.set(if (uic.findType.get() == 0) 1 else 0)
+            showData()
         }
     })
-    // 登陆
-    val loginClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
+    // 下一步
+    val nextClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-            "登陆".show()
+           if (checkParams()) {
+               val type = if (uic.findType.get()==0)"mobile" else "email"
+               UserApi().reset(type, accountName.get()!!, imageCode.get()!!, object :XinlyRxSubscriberHelper<BaseResp<Nothing>>(){
+                    override fun _onNext(t: BaseResp<Nothing>) {
+                        val bundle = Bundle()
+                        bundle.putInt(FindPasswordActivity.EXTRAS_FIND_TYPE, uic.findType.get())
+                        bundle.putString(FindPasswordActivity.EXTRAS_FIND_ACCOUNT, accountName.get())
+                        startActivity(SetPasswordActivity::class.java, bundle)
+                        finish()
+                    }
+
+                }, lifecycleProvider)
+           }
         }
     })
 
-    //next
+    //net
     // 获取图形码
     private fun requestImgCode() {
         SystemApi().getImageCode(object : BaseSubscriber<ResponseBody>(){
             override fun onNext(t: ResponseBody) {
                 imgCodeBmp.set(BitmapFactory.decodeStream(t.byteStream()))
             }
-
         }, lifecycleProvider)
     }
     // 发送验证码
-    private fun senCode() {
+    private fun sendCode() {
         if (checkAccount()&&checkImgCode()) {
             val params = HashMap<String, String>()
-            params["type"] = if (uic.regType.get()==0)"mobile" else "email"
+            params["type"] = if (uic.findType.get()==0)"mobile" else "email"
             params["target"] = accountName.get()!!
             params["code"] = imageCode.get()!!
 
             SystemApi().senCode(params, object : XinlyRxSubscriberHelper<BaseResp<Nothing>>(){
                 override fun _onNext(t: BaseResp<Nothing>) {
                     countdown()
-                    "验证码发送成功".show()
+                    "验证码发送成功".showAtCenter()
                 }
 
-            }, lifecycleProvider)
-        }
-    }
-    // 下一步
-    fun next() {
-        checkParams().yes {
-            val params = HashMap<String,String>()
-            params["type"] = if (uic.regType.get()==0)"mobile" else "email"
-            params["account"] = accountName.get()!!
-            params["password"] = EncryptUtils.encryptMD5ToString(passWord.get()!!)
-            params["code"] = verifCode.get()!!
-            params["inviteCode"] = recommendId.get()!!
-
-            UserApi().register(params, object : XinlyRxSubscriberHelper<RegisterData>(){
-                override fun _onNext(t: RegisterData) {
-                    "注册成功".show()
-                    TokenManager.updateToken(t.token)
-                }
             }, lifecycleProvider)
         }
     }
@@ -165,17 +143,17 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
     }
     // 数据展示
     private fun showData() {
-        toolBarData.rightText = if (uic.regType.get() == 0) "邮箱注册" else "手机注册"
-        toolBarData.titleText = if (uic.regType.get() == 0) "手机注册" else "邮箱注册"
-        accountHint.set(if (uic.regType.get() == 0) "请输入手机号码" else "请输入邮箱账号")
-        accountIcon.set(if (uic.regType.get() == 0) R.drawable.reg_mobile else R.drawable.reg_email)
+        toolBarData.titleText = "找回密码"
+        accountHint.set(if (uic.findType.get() == 0) "请输入手机号码" else "请输入邮箱账号")
+        switchFindPwdText.set(if (uic.findType.get() == 0) "使用邮箱找回" else "使用手机找回")
+        accountIcon.set(if (uic.findType.get() == 0) R.drawable.reg_mobile else R.drawable.reg_email)
         verifBtnText.set("获取验证码")
         verifBtnEnabled.set(true)
     }
     // 校验账号合法性
     private fun checkAccount(): Boolean {
         if (accountName.get().isNullOrEmpty()){
-            val accountHint: String = if (uic.regType.get()==0) "请输入手机号码" else "请输入邮箱账号"
+            val accountHint: String = if (uic.findType.get()==0) "请输入手机号码" else "请输入邮箱账号"
             accountHint.show()
             return false
         }
@@ -184,7 +162,7 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
     // 校验账号合法性
     private fun checkImgCode(): Boolean {
         if (imageCode.get().isNullOrEmpty()){
-           "请输入图形码".show()
+            "请输入图形码".show()
             return false
         }
         return true
@@ -199,14 +177,6 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
         }
         if (verifCode.get().isNullOrEmpty()) {
             "请输入验证码".show()
-            return false
-        }
-        if (passWord.get().isNullOrEmpty()) {
-            "请输入登陆密码".show()
-            return false
-        }
-        if (!agree.get()){
-            "注册需阅读并同意用户协议".show()
             return false
         }
         return true

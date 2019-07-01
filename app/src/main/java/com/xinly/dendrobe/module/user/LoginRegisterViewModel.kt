@@ -1,22 +1,24 @@
-package com.xinly.dendrobe.module.login
+package com.xinly.dendrobe.module.user
 
 import android.app.Application
+import android.os.Bundle
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
-import com.xinly.core.ext.show
 import com.xinly.core.viewmodel.BaseViewModel
-import com.xinly.dendrobe.module.register.RegisterActivity
 
 /**
  * Created by zm on 2019-06-28.
  */
 class LoginRegisterViewModel(application: Application): BaseViewModel(application) {
+
     /**
      * 手机登录
      */
     val mobileLogin: BindingCommand<Nothing> = BindingCommand(object:BindingAction{
         override fun call() {
-            startActivity(LoginActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt(LoginActivity.EXTRAS_REGISTER_TYPE, LoginActivity.TYPE_MOBILE)
+            startActivity(LoginActivity::class.java, bundle)
         }
 
     })
@@ -26,7 +28,9 @@ class LoginRegisterViewModel(application: Application): BaseViewModel(applicatio
      */
     val emailLogin: BindingCommand<Nothing> = BindingCommand(object:BindingAction{
         override fun call() {
-            "邮箱登录".show()
+            val bundle = Bundle()
+            bundle.putInt(LoginActivity.EXTRAS_REGISTER_TYPE, LoginActivity.TYPE_EMAIL)
+            startActivity(LoginActivity::class.java, bundle)
         }
 
     })
