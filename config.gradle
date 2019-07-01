@@ -79,7 +79,7 @@ ext{
             /**
              * DEV 开发环境
              */
-            HOST_DEV  : 'http://app.dendrobe.btp38.com/',
+            HOST_DEV  : 'http://192.168.0.121:8201/',
             /**
              * RE 正式环境那
              */

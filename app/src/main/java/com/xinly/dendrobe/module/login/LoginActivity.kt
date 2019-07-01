@@ -7,7 +7,7 @@ import com.xinly.dendrobe.R
 import com.xinly.dendrobe.databinding.LoginBinding
 
 /**
- * 登陆入口
+ * 手机号登陆
  */
 class LoginActivity : BaseActivity<LoginBinding, LoginViewModel>() {
 

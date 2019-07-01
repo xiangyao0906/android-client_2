@@ -1,5 +1,6 @@
 package com.xinly.dendrobe.api
 
+import android.graphics.Bitmap
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.execute
@@ -9,6 +10,7 @@ import com.xinly.dendrobe.component.data.BaseRequestBody
 import com.xinly.dendrobe.component.net.XinlyRequestManager
 import io.reactivex.Observable
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -24,7 +26,7 @@ class SystemApi {
     interface Api {
         // 获取图形码
         @POST("api/service/verify/captcha/create")
-        fun getImageCode(): Observable<BaseResp<Nothing>>
+        fun getImageCode(@Body requestBody: RequestBody): Observable<ResponseBody>
         // 发送验证码
         @POST("api/service/verify/code/send")
         fun sendCode(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
@@ -33,8 +35,8 @@ class SystemApi {
     /**
      * 获取图形码
      */
-    fun getImageCode(subscriber: BaseSubscriber<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
-        api.getImageCode().execute(subscriber,lifecycleProvider)
+    fun getImageCode(subscriber: BaseSubscriber<ResponseBody>, lifecycleProvider: LifecycleProvider<*>) {
+        api.getImageCode(BaseRequestBody(null).toRequestBody()).execute(subscriber,lifecycleProvider)
     }
 
     /**

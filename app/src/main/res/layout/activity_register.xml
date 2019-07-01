@@ -90,7 +90,7 @@
                         android:id="@+id/iv_img_code"
                         android:layout_width="70dp"
                         android:layout_height="32dp"
-                        bind:url="@{viewModel.imgCodeUrl}"
+                        bind:bmp="@{viewModel.imgCodeBmp}"
                         tools:background="@drawable/reg_bg_get_code"/>
 
                 <ImageView
@@ -139,13 +139,16 @@
                         android:id="@+id/tv_get_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center"
                         android:layout_marginEnd="10dp"
-                        android:padding="8dp"
                         android:textSize="14sp"
+                        android:enabled="@{viewModel.verifBtnEnabled}"
                         bind:onClickCommand="@{viewModel.sendCodeClick}"
                         android:background="@drawable/reg_bg_get_code"
                         android:textColor="@color/font_blue_light"
-                        android:text="获取验证码"/>
+                        tools:text="获取验证码"
+                        android:text="@{viewModel.verifBtnText}"/>
             </LinearLayout>
 
             <View android:layout_width="match_parent"

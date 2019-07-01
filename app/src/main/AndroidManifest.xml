@@ -20,7 +20,7 @@
         <activity android:name=".module.register.RegisterActivity">
         </activity>
         <activity
-                android:name=".module.login.LoginActivity"
+                android:name=".module.login.LoginRegisterActivity"
                 android:theme="@style/FullScreen.AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".module.login.MobileLoginActivity">
+        <activity android:name=".module.login.LoginActivity">
         </activity>
         <activity android:name=".module.main.MainActivity">
         </activity>

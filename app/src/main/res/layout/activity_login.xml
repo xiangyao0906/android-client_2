@@ -1,89 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:binding="http://schemas.android.com/apk/res-auto"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
     <data class="LoginBinding">
-        <variable name="viewModel" type="com.xinly.dendrobe.module.login.LoginViewModel"/>
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             tools:context=".module.login.LoginActivity">
 
-        <ImageView
-                android:src="@drawable/login_bg_top"
-                android:layout_width="0dp"
-                android:layout_height="260dp"
-                android:scaleType="fitXY"
-                android:id="@+id/imageView" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"/>
 
-        <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                binding:onClickCommand="@{viewModel.mobileLogin}"
-                android:drawableStart="@drawable/login_phone"
-                android:id="@+id/btn_login_phone" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="36dp" android:layout_marginEnd="36dp"
-                android:background="@drawable/login_bg_button"
-                app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginBottom="20dp" app:layout_constraintBottom_toTopOf="@+id/btn_login_email">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/font_black"
-                    android:textSize="16sp"
-                    android:drawablePadding="5dp"
-                    android:layout_gravity="center"
-                    android:drawableStart="@drawable/login_phone"
-                    android:layout_height="wrap_content"
-                    android:text="手机登录"/>
-        </FrameLayout>
-
-        <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                binding:onClickCommand="@{viewModel.emailLogin}"
-                android:id="@+id/btn_login_email" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="36dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="36dp" app:layout_constraintHorizontal_bias="0.0"
-                android:background="@drawable/login_bg_button"
-                android:layout_marginBottom="20dp" app:layout_constraintBottom_toTopOf="@+id/tv_register">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/font_black"
-                    android:textSize="16sp"
-                    android:drawablePadding="5dp"
-                    android:layout_gravity="center"
-                    android:drawableStart="@drawable/login_email"
-                    android:layout_height="wrap_content"
-                    android:text="邮箱登录"/>
-        </FrameLayout>
-        <TextView
-                android:text="立即注册"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_register"
-                binding:onClickCommand="@{viewModel.goRegister}"
-                android:drawableEnd="@drawable/arrow_right_black"
-                android:drawablePadding="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/font_black_light" android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_login_hint" android:layout_marginBottom="54dp"/>
-        <TextView
-                android:text="云仓天天拼会员可直接使用手机登录"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_login_hint" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:textColor="@color/font_gray" android:textSize="12sp" android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
