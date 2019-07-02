@@ -20,8 +20,8 @@
     <!--activity START-->
     <!--启动页 背景主题 冷启动 减少白屏-->
     <style name="Splash.FullScreen.AppTheme" parent="FullScreen.AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@drawable/launch_bg</item>
     </style>
     <style name="FullScreen.AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -29,4 +29,10 @@
     </style>
     <style name="FullScreen.AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="FullScreen.AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

@@ -132,6 +132,7 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     private fun countdown() {
         Flowable.intervalRange(0, 11, 0, 1, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
+            .compose(lifecycleProvider.bindToLifecycle())
             .doOnNext {
                 verifBtnEnabled.set(false)
                 verifBtnText.set("重新获取(${10-it})")

@@ -12,7 +12,9 @@ import com.xinly.core.viewmodel.BaseViewModel
 import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.component.net.TokenManager
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
+import com.xinly.dendrobe.helper.AccountManager
 import com.xinly.dendrobe.model.vo.result.LoginData
+import com.xinly.dendrobe.module.main.MainActivity
 
 /**
  * Created by zm on 2019-06-28.
@@ -102,7 +104,13 @@ class LoginViewModel(application: Application): BaseViewModel(application) {
         val type = if (loginType.get()== LoginActivity.TYPE_MOBILE)"mobile" else "email"
         UserApi().login(type, accountName.get()!!, passWord.get()!!, object : XinlyRxSubscriberHelper<LoginData>(){
             override fun _onNext(t: LoginData) {
+                // 更新token
                 TokenManager.updateToken(t.token)
+                // 更新用户数据
+                AccountManager.instance.updateAccount(t.member)
+                // 修改登出标志
+                AccountManager.instance.setLogoutFlag(false)
+                startActivity(MainActivity::class.java)
             }
 
         },lifecycleProvider)

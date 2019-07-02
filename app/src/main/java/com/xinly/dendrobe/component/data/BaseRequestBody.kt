@@ -22,7 +22,7 @@ class BaseRequestBody<T>(data: T) : BaseReq<T>(data){
 
     init {
         equip = EquipData()
-        sign = EncryptUtils.encryptMD5ToString("${equip.uuid}${TokenManager.sToken}$time", Constans.MD5_SALT)
+        sign = EncryptUtils.encryptMD5ToString("${equip.uuid}${TokenManager.getToken()}$time", Constans.MD5_SALT)
     }
 
     class EquipData{

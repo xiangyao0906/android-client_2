@@ -5,8 +5,11 @@ package com.xinly.dendrobe.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import com.google.gson.Gson
+import com.xinly.core.log.DLog
 import com.xinly.dendrobe.XinlyApplication
 import com.xinly.dendrobe.model.constans.Constans
+import java.lang.Exception
 
 /*
  * SP工具类
@@ -96,6 +99,29 @@ object PrefsUtils {
     fun getStringSet(key: String): Set<String> {
         val set = setOf<String>()
         return sp.getStringSet(key, set)
+    }
+
+    /*
+        通过Gson转换成json格式的String进行存储对象
+     */
+    fun putObject(key: String, value: Any) {
+        putString(key, Gson().toJson(value))
+    }
+
+    /**
+        通过Gson去解析json格式，转换回对象返回
+     */
+    fun <T> getObject(key: String, clazz: Class<T>): T? {
+        val jsonString = getString(key)
+        if (jsonString.isEmpty()) {
+            return null
+        }
+        return try {
+            Gson().fromJson<T>(jsonString, clazz)
+        }catch (e: Exception) {
+            DLog.e("PrefsUtils", e.message)
+            null
+        }
     }
 
     /*

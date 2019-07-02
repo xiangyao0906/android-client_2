@@ -17,26 +17,34 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".module.user.SetPasswordActivity">
-        </activity>
-        <activity android:name=".module.user.FindPasswordActivity">
-        </activity>
-        <activity android:name=".module.user.RegisterActivity">
-        </activity>
+        <!-- 闪屏页 START -->
         <activity
-                android:name=".module.user.LoginRegisterActivity"
-                android:theme="@style/FullScreen.AppTheme">
+                android:name=".module.launch.SplashActivity"
+                android:theme="@style/Splash.FullScreen.AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- 闪屏页 END -->
+        <!-- 账户操作 START -->
         <activity
-                android:name=".module.user.LoginActivity"
-                android:launchMode="singleTop">
+                android:name=".module.user.LoginRegisterActivity"
+                android:theme="@style/FullScreen.AppTheme">
         </activity>
-        <activity android:name=".module.main.MainActivity">
+        <activity android:name=".module.user.LoginActivity">
+        </activity>
+        <activity android:name=".module.user.RegisterActivity">
+        </activity>
+        <activity android:name=".module.user.FindPasswordActivity">
+        </activity>
+        <activity android:name=".module.user.SetPasswordActivity">
+        </activity>
+        <!-- 账户操作 END -->
+        <activity
+                android:name=".module.main.MainActivity"
+                android:launchMode="singleTask">
         </activity>
     </application>
 

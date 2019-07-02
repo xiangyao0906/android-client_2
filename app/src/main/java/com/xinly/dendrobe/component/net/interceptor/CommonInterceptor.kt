@@ -33,8 +33,8 @@ class CommonInterceptor: Interceptor {
         /**
          * 已经登录的用户 带上Authorization token
          */
-        TokenManager.sToken.isNotEmpty().yes {
-            requestBuilder.addHeader(TokenManager.TOKEN, TokenManager.sToken)
+        TokenManager.getToken().isNotEmpty().yes {
+            requestBuilder.addHeader(TokenManager.TOKEN, TokenManager.getToken())
         }
 
         return chain.proceed(requestBuilder.build())
