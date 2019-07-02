@@ -7,8 +7,17 @@
     <!-- 状态栏高度 -->
     <dimen name="status_bar_height">25dp</dimen>
 
-    <dimen name="fixed_height_bottom_padding">8dp</dimen>
+    <dimen name="common_padding_middle">16dp</dimen>
+    <dimen name="common_padding_small">10dp</dimen>
 
     <!-- BottomNavBar 文字与图片间间距-->
     <dimen name="fixed_height_top_padding_inactive">-3dp</dimen>
+    <!-- 商城 -->
+    <dimen name="news_height">44dp</dimen>
+
+    <!-- 字体 -->
+    <dimen name="text_small_size">12sp</dimen>
+    <dimen name="text_middle_size">14sp</dimen>
+    <dimen name="text_big_size">16sp</dimen>
+    <dimen name="text_large_size">18sp</dimen>
 </resources>

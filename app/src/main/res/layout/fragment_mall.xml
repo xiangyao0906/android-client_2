@@ -3,10 +3,35 @@
     <data class="MallBinding">
         <variable name="viewModel" type="com.xinly.dendrobe.module.mall.MallViewModel"/>
     </data>
-    <FrameLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             tools:context=".module.financing.FinancingFragment">
 
-    </FrameLayout>
+        <com.xinly.dendrobe.widget.NoticeFlipperView
+                android:id="@+id/mNoticeFlipperView"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"/>
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="180dp"
+                     android:background="@drawable/mall_banner_bg">
+
+            <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@color/white"/>
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:overScrollMode="never"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
 </layout>

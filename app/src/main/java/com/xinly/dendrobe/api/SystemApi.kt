@@ -1,13 +1,14 @@
 package com.xinly.dendrobe.api
 
-import android.graphics.Bitmap
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.xinly.core.data.protocol.BaseResp
+import com.xinly.core.ext.convert
 import com.xinly.core.ext.execute
 import com.xinly.core.ext.handleResult
 import com.xinly.core.rx.BaseSubscriber
 import com.xinly.dendrobe.component.data.BaseRequestBody
 import com.xinly.dendrobe.component.net.XinlyRequestManager
+import com.xinly.dendrobe.model.vo.result.ConfigIndexData
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -30,6 +31,9 @@ class SystemApi {
         // 发送验证码
         @POST("api/service/verify/code/send")
         fun sendCode(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
+        // 获取首页信息
+        @POST("api/service/config/index")
+        fun configIndex(@Body requestBody: RequestBody): Observable<BaseResp<ConfigIndexData>>
     }
 
     /**
@@ -45,6 +49,15 @@ class SystemApi {
     fun senCode(params: Map<String, String>,subscriber: BaseSubscriber<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
         api.sendCode(BaseRequestBody(params).toRequestBody())
             .handleResult()
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 获取用户首页配置
+     */
+    fun configIndex(subscriber: BaseSubscriber<ConfigIndexData>, lifecycleProvider: LifecycleProvider<*>) {
+        api.configIndex(BaseRequestBody(null).toRequestBody())
+            .convert()
             .execute(subscriber, lifecycleProvider)
     }
 }
