@@ -1,6 +1,10 @@
 package com.xinly.dendrobe.module.launch
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.xinly.core.ext.no
 import com.xinly.core.ui.activity.BaseActivity
 import com.xinly.dendrobe.BR
 import com.xinly.dendrobe.R
@@ -21,4 +25,19 @@ class SplashActivity : BaseActivity<SplashBinding,SplashViewModel>() {
         return BR.viewModel
     }
 
+    override fun initData() {
+        //权限请求
+        requestPermissions()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun requestPermissions() {
+        RxPermissions(this)
+            .request(Manifest.permission.READ_PHONE_STATE)
+            .subscribe {
+                it.no {
+                    finish()
+                }
+            }
+    }
 }

@@ -6,4 +6,9 @@
     <dimen name="btn_height">44dp</dimen>
     <!-- 状态栏高度 -->
     <dimen name="status_bar_height">25dp</dimen>
+
+    <dimen name="fixed_height_bottom_padding">8dp</dimen>
+
+    <!-- BottomNavBar 文字与图片间间距-->
+    <dimen name="fixed_height_top_padding_inactive">-3dp</dimen>
 </resources>
