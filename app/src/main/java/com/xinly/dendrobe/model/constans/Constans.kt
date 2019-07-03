@@ -13,4 +13,7 @@ object Constans{
     //SP表名
     const val TABLE_PREFS = "dendrobe"
     /*********************-Config END-************************/
+
+    //SP键名
+    const val SP_MINE_PASSWORD_VISIBLE = "sp_mine_password_visible"
 }

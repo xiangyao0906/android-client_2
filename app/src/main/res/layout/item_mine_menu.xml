@@ -7,15 +7,16 @@
 
     <ImageView
             android:id="@+id/menuIcon"
-            android:layout_marginTop="10dp"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="25dp"
+            android:layout_height="24dp"
             android:background="#EDF8FC"/>
 
     <TextView
             android:id="@+id/menuName"
-            android:layout_marginTop="6dp"
-            android:textSize="12sp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="13sp"
             android:textColor="@color/font_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

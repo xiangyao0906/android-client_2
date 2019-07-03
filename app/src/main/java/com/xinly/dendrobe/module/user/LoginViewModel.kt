@@ -117,6 +117,7 @@ class LoginViewModel(application: Application): BaseViewModel(application) {
                 }else{
                     startActivity(BasicInfoActivity::class.java)
                 }
+                finish()
             }
 
         },lifecycleProvider)

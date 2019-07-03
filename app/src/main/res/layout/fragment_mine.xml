@@ -1,12 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data class="MineBinding">
         <variable name="viewModel" type="com.xinly.dendrobe.module.mine.MineViewModel"/>
     </data>
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".module.financing.FinancingFragment">
+            android:orientation="vertical"
+            tools:context=".module.mine.MineFragment">
 
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+            <RelativeLayout
+                    android:id="@+id/rl_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:background="@drawable/mine_bg_user_info">
+
+                <!-- 设置 -->
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="16dp"
+                        bind:onClickCommand="@{viewModel.jumpSettingsClick}"
+                        android:src="@drawable/mine_settings"/>
+
+                <!-- 头像 -->
+                <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        bind:url="@{viewModel.userData.avatar}"
+                        android:background="@drawable/user_avatar_def"
+                        android:layout_marginTop="47dp"
+                        android:layout_marginStart="28dp"/>
+
+                <!-- 昵称 -->
+                <TextView
+                        android:id="@+id/nickName"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="昵称"
+                        android:text="@{viewModel.userData.nickname}"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_toEndOf="@id/avatar"
+                        android:layout_alignTop="@id/avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/invitationText"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:text="邀请码："
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/nickName"
+                        android:layout_alignStart="@id/nickName"
+                        android:layout_toEndOf="@id/avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/invitationCode"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="123456789"
+                        android:text="@{viewModel.userData.code}"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/nickName"
+                        android:layout_toEndOf="@id/invitationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <!-- 复制-->
+                <TextView
+                        android:id="@+id/copy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:drawablePadding="5dp"
+                        android:drawableStart="@drawable/mine_copy"
+                        bind:onClickCommand="@{viewModel.copyClick}"
+                        android:layout_marginStart="10dp"
+                        android:layout_alignBaseline="@id/invitationCode"
+                        android:layout_toEndOf="@id/invitationCode"
+                        android:text="复制"/>
+
+                <!-- 余额 -->
+                <TextView
+                        android:id="@+id/balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:text="@{viewModel.balance}"
+                        tools:text="0.00"
+                        android:layout_marginBottom="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"/>
+
+                <ImageView
+                        android:id="@+id/ivSwitchPwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/balance"
+                        android:layout_alignTop="@id/balance"
+                        bind:onClickCommand="@{viewModel.passwordShowSwitchOnClick}"
+                        android:paddingTop="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        bind:src="@{viewModel.visibleIcon}"
+                        tools:src="@drawable/mine_balance_visible"/>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="27dp"
+                        android:layout_marginEnd="29dp"
+                        android:layout_marginBottom="13dp"
+                        android:layout_above="@id/balance"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="16dp"
+                            android:textSize="16sp"
+                            android:text="我的资产"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:text="(青豆)"/>
+
+                    <View android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_height="0dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            bind:onClickCommand="@{viewModel.viewBill}"
+                            android:layout_marginEnd="15dp"
+                            android:drawablePadding="5dp"
+                            android:drawableEnd="@drawable/arrow_right_white"
+                            android:text="查看账单"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ImageView
+                    android:id="@+id/iv_wallet"
+                    android:layout_width="119dp"
+                    android:layout_height="40dp"
+                    android:textColor="@color/font_cyan"
+                    android:layout_below="@id/rl_user_info"
+                    android:layout_centerHorizontal="true"
+                    bind:onClickCommand="@{viewModel.jumpWalletClick}"
+                    android:layout_marginTop="-20dp"
+                    android:background="@drawable/mine_bg_wallet"/>
+
+            <LinearLayout
+                    android:id="@+id/ll_menu_title"
+                    android:layout_below="@id/iv_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+                <View android:layout_width="4dp"
+                      android:layout_height="15dp"
+                      android:background="@color/font_blue_light"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/font_black"
+                        android:text="常用工具"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/ll_menu_title"
+                    android:overScrollMode="never"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </FrameLayout>
 </layout>

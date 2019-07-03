@@ -33,7 +33,7 @@ class SetPwdViewModel(application: Application): BaseToolBarViewModel(applicatio
     val uic = UIChangeObservable()
     class UIChangeObservable{
         //密码开关观察者
-        val pSwitchObservable = ObservableBoolean(false)
+        val pSwitchObservable = ObservableBoolean(true)
     }
 
     //event

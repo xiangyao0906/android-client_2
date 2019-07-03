@@ -1,5 +1,7 @@
 package com.xinly.dendrobe.model.vo.bean;
 
+import com.xinly.dendrobe.util.BigDecimalUtils;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * Created by zm on 2019-07-01.
  */
 public class UserBean implements Serializable, Cloneable {
-    private int code;
+    private String code;
     private String nickname; //昵称
     private String realname; //真实姓名
     private String identity; //身份证号码
@@ -16,7 +18,7 @@ public class UserBean implements Serializable, Cloneable {
     private String email; //邮箱号码
     private String avatar; //邮箱地址
     private Double bean; //青豆数量
-    private Double dend; //石斛数量
+    private String dend; //石斛数量
     private long createTime;
 
     @Override
@@ -24,11 +26,11 @@ public class UserBean implements Serializable, Cloneable {
         return (UserBean) super.clone();
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -80,19 +82,19 @@ public class UserBean implements Serializable, Cloneable {
         this.avatar = avatar;
     }
 
-    public Double getBean() {
-        return bean;
+    public String getBean() {
+        return BigDecimalUtils.format(bean, 2);
     }
 
     public void setBean(Double bean) {
         this.bean = bean;
     }
 
-    public Double getDend() {
+    public String getDend() {
         return dend;
     }
 
-    public void setDend(Double dend) {
+    public void setDend(String dend) {
         this.dend = dend;
     }
 
@@ -112,7 +114,7 @@ public class UserBean implements Serializable, Cloneable {
         if (null != userBean.nickname) {
             this.nickname = userBean.nickname;
         }
-        if (0 != userBean.code) {
+        if (null != userBean.code) {
             this.code = userBean.code;
         }
         if (null != userBean.realname) {
@@ -127,10 +129,10 @@ public class UserBean implements Serializable, Cloneable {
         if (null != userBean.email) {
             this.email = userBean.email;
         }
-        if (0 != userBean.bean) {
+        if (null != userBean.bean) {
             this.bean = userBean.bean;
         }
-        if (0 != userBean.dend) {
+        if (null != userBean.dend) {
             this.dend = userBean.dend;
         }
         if (0 != userBean.createTime) {

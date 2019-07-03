@@ -14,7 +14,7 @@ import com.xinly.dendrobe.module.user.LoginActivity
  */
 class AccountManager private constructor(){
 
-    var mUserBean: UserBean? = null
+    private var mUserBean: UserBean? = null
 
     companion object {
         val instance: AccountManager by lazy(LazyThreadSafetyMode.SYNCHRONIZED){ AccountManager() }
@@ -56,6 +56,13 @@ class AccountManager private constructor(){
             }
         }
         return true
+    }
+
+    fun getAccount(): UserBean?{
+        if (mUserBean == null) {
+            initAccount()
+        }
+        return mUserBean
     }
 
     private fun getAccountName(): String? {
