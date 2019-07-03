@@ -56,6 +56,8 @@ dependencies {
     implementation project(':librarys:XinlyCore')
     // 底部导航
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
-    // banner
+    // banner {link https://github.com/youth5201314/banner}
     implementation 'com.youth.banner:banner:1.4.10'
+    // matisse{link https://github.com/NFLeo/Matisse-Kotlin}
+    implementation 'com.nfleo:MatisseKotlin:1.1.0'
 }

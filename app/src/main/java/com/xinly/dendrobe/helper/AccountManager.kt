@@ -68,6 +68,16 @@ class AccountManager private constructor(){
         return mUserBean?.mobile ?: mUserBean?.email
     }
 
+    private fun getNickName(): String? {
+        if (mUserBean == null) {
+            initAccount()
+        }
+        if (mUserBean == null){
+            return null
+        }
+        return mUserBean?.nickname
+    }
+
     /**
      * token 存在
      * mobile or email 存在
@@ -82,7 +92,11 @@ class AccountManager private constructor(){
        if (getAccountName().isNullOrEmpty()){
            return false
        }
-        return true
+       // 昵称为为空 未登录
+       if (getNickName().isNullOrEmpty()) {
+           return false
+       }
+       return true
     }
 
     // 登出标志

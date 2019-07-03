@@ -100,7 +100,7 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
     // 登陆
     val loginClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-            startActivity(LoginActivity::class.java)
+            finish()
         }
     })
 
@@ -144,6 +144,8 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
                 override fun _onNext(t: RegisterData) {
                     "注册成功".show()
                     TokenManager.updateToken(t.token)
+                    startActivity(BasicInfoActivity::class.java)
+                    finish()
                 }
             }, lifecycleProvider)
         }

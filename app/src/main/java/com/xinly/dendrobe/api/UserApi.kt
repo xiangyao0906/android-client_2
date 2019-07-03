@@ -4,6 +4,7 @@ import com.trello.rxlifecycle3.LifecycleProvider
 import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.convert
 import com.xinly.core.ext.execute
+import com.xinly.core.ext.handleResult
 import com.xinly.core.rx.BaseSubscriber
 import com.xinly.core.utils.EncryptUtils
 import com.xinly.dendrobe.component.data.BaseRequestBody
@@ -41,6 +42,9 @@ class UserApi {
         // 设置密码
         @POST("api/user/auth/reset/set")
         fun setPwd(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
+        // 填写基本资料
+        @POST("api/user/auth/info/commit")
+        fun submitData(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
     }
 
     /**
@@ -92,6 +96,24 @@ class UserApi {
         params["password"] = password
 
         api.setPwd(BaseRequestBody(params).toRequestBody())
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 提交基本资料
+     * @param avatar 头像
+     * @param nickname 昵称
+     * @param nickname 安全码
+     */
+    fun submitData(avatar: String, nickname: String, security: String,
+                   subscriber: BaseSubscriber<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
+        val params = HashMap<String, String>()
+        params["avatar"] = avatar
+        params["nickname"] = nickname
+        params["security"] = EncryptUtils.encryptMD5ToString(security)
+
+        api.submitData(BaseRequestBody(params).toRequestBody())
+            .handleResult()
             .execute(subscriber, lifecycleProvider)
     }
 }

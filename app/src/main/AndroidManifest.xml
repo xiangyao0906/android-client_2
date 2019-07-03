@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
             android:name=".XinlyApplication"
@@ -16,7 +19,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
+            tools:replace="android:icon,android:theme,android:roundIcon,android:label"
             tools:ignore="GoogleAppIndexingWarning">
+        <!-- 适配7.0 -->
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths_public"/>
+        </provider>
+        <activity android:name="com.matisse.ui.view.MatisseActivity" />
         <!-- 闪屏页 START -->
         <activity
                 android:name=".module.launch.SplashActivity"
@@ -26,8 +41,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <!-- 闪屏页 END -->
+        </activity> <!-- 闪屏页 END -->
         <!-- 账户操作 START -->
         <activity
                 android:name=".module.user.LoginRegisterActivity"
@@ -40,6 +54,8 @@
         <activity android:name=".module.user.FindPasswordActivity">
         </activity>
         <activity android:name=".module.user.SetPasswordActivity">
+        </activity>
+        <activity android:name=".module.user.BasicInfoActivity">
         </activity>
         <!-- 账户操作 END -->
         <activity

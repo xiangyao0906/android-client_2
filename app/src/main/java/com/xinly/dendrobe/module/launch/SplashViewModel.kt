@@ -5,6 +5,7 @@ import android.app.Application
 import com.xinly.core.viewmodel.BaseViewModel
 import com.xinly.dendrobe.helper.AccountManager
 import com.xinly.dendrobe.module.main.MainActivity
+import com.xinly.dendrobe.module.user.LoginRegisterActivity
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
@@ -14,16 +15,11 @@ import java.util.concurrent.TimeUnit
  */
 class SplashViewModel(application: Application): BaseViewModel(application) {
 
-    override fun onCreate() {
-        super.onCreate()
-        autoLogin()
-    }
-
     /**
      * 自动登录
      */
     @SuppressLint("CheckResult")
-    private fun autoLogin() {
+    fun autoLogin() {
         Flowable.timer(2, TimeUnit.SECONDS)
             .subscribeOn(AndroidSchedulers.mainThread())
             .compose(lifecycleProvider.bindToLifecycle())
@@ -31,10 +27,11 @@ class SplashViewModel(application: Application): BaseViewModel(application) {
                 if (AccountManager.instance.isLogin()) {
                     startActivity(MainActivity::class.java)
                     finish()
+                }else {
+                    startActivity(LoginRegisterActivity::class.java)
+                    finish()
                 }
             }
-            .subscribe {
-
-            }
+            .subscribe()
     }
 }

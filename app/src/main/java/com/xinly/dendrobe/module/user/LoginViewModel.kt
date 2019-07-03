@@ -110,7 +110,13 @@ class LoginViewModel(application: Application): BaseViewModel(application) {
                 AccountManager.instance.updateAccount(t.member)
                 // 修改登出标志
                 AccountManager.instance.setLogoutFlag(false)
-                startActivity(MainActivity::class.java)
+
+                // 信息是否完整
+                if (AccountManager.instance.isLogin()) {
+                    startActivity(MainActivity::class.java)
+                }else{
+                    startActivity(BasicInfoActivity::class.java)
+                }
             }
 
         },lifecycleProvider)

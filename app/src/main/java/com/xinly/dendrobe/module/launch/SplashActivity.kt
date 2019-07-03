@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.xinly.core.ext.no
 import com.xinly.core.ui.activity.BaseActivity
 import com.xinly.dendrobe.BR
 import com.xinly.dendrobe.R
@@ -33,9 +32,13 @@ class SplashActivity : BaseActivity<SplashBinding,SplashViewModel>() {
     @SuppressLint("CheckResult")
     private fun requestPermissions() {
         RxPermissions(this)
-            .request(Manifest.permission.READ_PHONE_STATE)
+            .request(Manifest.permission.READ_PHONE_STATE
+                , Manifest.permission.READ_EXTERNAL_STORAGE
+                , Manifest.permission.WRITE_EXTERNAL_STORAGE)
             .subscribe {
-                it.no {
+                if (it){
+                    viewModel?.autoLogin()
+                }else{
                     finish()
                 }
             }

@@ -8,5 +8,9 @@
             android:layout_height="match_parent"
             tools:context=".module.financing.FinancingFragment">
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:text="交易"/>
     </FrameLayout>
 </layout>

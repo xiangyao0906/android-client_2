@@ -12,6 +12,7 @@ import com.xinly.dendrobe.api.SystemApi
 import com.xinly.dendrobe.base.BaseRecyclerViewAdapter
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.databinding.MallBinding
+import com.xinly.dendrobe.helper.AccountManager
 import com.xinly.dendrobe.model.vo.result.ConfigIndexData
 import com.xinly.dendrobe.widget.BannerImageLoader
 import com.youth.banner.BannerConfig
@@ -77,10 +78,12 @@ class MallFragment : BaseFragment<MallBinding, MallViewModel>() {
             val newNotices = notice.map { it.title }
             binding.mNoticeFlipperView.setData(newNotices)
             // banner
-            val newImgUrls: MutableList<String> = slide.filter { it.type=="url" }.map { it.image } as MutableList<String>
+            val newImgUrls: MutableList<String> = slide.map { it.image } as MutableList<String>
             binding.banner.setImages(newImgUrls).start()
             // recyclerView
             mAdapter.setData(menu)
+            // update User Data
+            AccountManager.instance.updateAccount(member)
         }
     }
 }

@@ -80,7 +80,7 @@ object XinlyRetrofitClient: RetrofitClient() {
             .cache(cache)
 
         (SystemUtil.isCanLog()).yes {
-            okHttpClient.addInterceptor(logInterceptor)
+//            okHttpClient.addInterceptor(logInterceptor)
         }
 
         return okHttpClient.build()
