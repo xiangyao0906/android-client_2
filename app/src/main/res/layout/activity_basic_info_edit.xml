@@ -238,12 +238,12 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:enabled="@{(viewModel.userData.code==0)?true:false}"
-                    android:textColor="@{(viewModel.userData.code==0)? @color/font_black :  @color/font_gray_light}"
+                    android:enabled="@{(viewModel.userData.inviteInfo!=null)?false:true}"
+                    android:textColor="@{(viewModel.userData.inviteInfo!=null)? @color/font_black : @color/font_gray_light}"
                     android:textSize="14sp"
                     android:gravity="right"
                     bind:onClickCommand="@{viewModel.updateInviterClick}"
-                    android:text="@{(viewModel.userData.code==0)? String.valueOf(viewModel.userData.code) : @string/common_settings_no}"
+                    android:text="@{(viewModel.userData.inviteInfo!=null)? String.valueOf(viewModel.userData.inviteInfo.nickname) : @string/common_settings_no}"
                     tools:text="@string/app_name"
                     android:layout_marginStart="20dp"
                     android:singleLine="true"/>
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:layout_marginStart="8dp"
-                    android:visibility="@{(viewModel.userData.code==0) ? View.VISIBLE : View.INVISIBLE}"
+                    android:visibility="@{(viewModel.userData.inviteInfo!=null) ? View.INVISIBLE : View.VISIBLE}"
                     android:src="@drawable/arrow_right_black"/>
         </LinearLayout>
     </LinearLayout>

@@ -6,6 +6,7 @@ import androidx.databinding.ObservableField
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.show
+import com.xinly.core.ext.showAtCenter
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.api.FileApi
 import com.xinly.dendrobe.api.UserApi
@@ -87,26 +88,26 @@ class BasicInfoViewModel(application: Application): BaseToolBarViewModel(applica
     //效验参数合法性
     private fun checkParams(): Boolean {
         if (avatarUrl.get().isNullOrEmpty()) {
-            "请上传头像".show()
+            "请上传头像".showAtCenter()
         }
         if (nickName.get().isNullOrEmpty()) {
-            "请输入昵称".show()
+            "请输入昵称".showAtCenter()
             return false
         }
         if (password.get().isNullOrEmpty()) {
-            "请输入安全码".show()
+            "请输入安全码".showAtCenter()
             return false
         }
         if (password.get()!!.length != 6) {
-            "安全码为6位数字".show()
+            "安全码为6位数字".showAtCenter()
             return false
         }
         if (confirmPwd.get().isNullOrEmpty()) {
-            "请输入确认安全码".show()
+            "请输入确认安全码".showAtCenter()
             return false
         }
         if (password.get() != confirmPwd.get()) {
-            "两次输入密码不一致".show()
+            "两次输入密码不一致".showAtCenter()
             return false
         }
         return true

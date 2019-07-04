@@ -66,6 +66,7 @@ class UserInfoEditViewModel(application: Application): BaseToolBarViewModel(appl
     //我的邀请人
     val updateInviterClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
+            startActivity(InviterBindingActivity::class.java)
         }
 
     })

@@ -168,7 +168,7 @@ class ChangeSecurityCodeViewModel(application: Application): BaseToolBarViewMode
     // 校验账号合法性
     private fun checkImgCode(): Boolean {
         if (imageCode.get().isNullOrEmpty()){
-            "请输入图形码".show()
+            "请输入图形码".showAtCenter()
             return false
         }
         return true
@@ -182,7 +182,7 @@ class ChangeSecurityCodeViewModel(application: Application): BaseToolBarViewMode
             return false
         }
         if (verifCode.get().isNullOrEmpty()) {
-            "请输入验证码".show()
+            "请输入验证码".showAtCenter()
             return false
         }
         return true

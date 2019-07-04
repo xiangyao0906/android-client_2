@@ -6,7 +6,6 @@ import androidx.databinding.ObservableField
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.data.protocol.BaseResp
-import com.xinly.core.ext.show
 import com.xinly.core.ext.showAtCenter
 import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
@@ -65,15 +64,15 @@ class SetPwdViewModel(application: Application): BaseToolBarViewModel(applicatio
     // 校验注册参数合法性
     private fun checkParams(): Boolean{
         if (passWord.get().isNullOrEmpty()) {
-            "请输入新密码".show()
+            "请输入新密码".showAtCenter()
             return false
         }
         if (confirmPwd.get().isNullOrEmpty()) {
-            "请输入确认密码".show()
+            "请输入确认密码".showAtCenter()
             return false
         }
         if (passWord.get() != confirmPwd.get()) {
-            "两次密码输入不一致".show()
+            "两次密码输入不一致".showAtCenter()
             return false
         }
         return true

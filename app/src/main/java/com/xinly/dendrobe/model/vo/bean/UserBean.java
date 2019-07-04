@@ -20,10 +20,19 @@ public class UserBean implements Serializable, Cloneable {
     private Double bean; //青豆数量
     private String dend; //石斛数量
     private long createTime;
+    private UserBean inviteInfo;
 
     @Override
     protected UserBean clone() throws CloneNotSupportedException {
         return (UserBean) super.clone();
+    }
+
+    public UserBean getInviteInfo() {
+        return inviteInfo;
+    }
+
+    public void setInviteInfo(UserBean inviteInfo) {
+        this.inviteInfo = inviteInfo;
     }
 
     public int getCode() {
