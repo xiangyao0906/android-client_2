@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Bundle
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import com.xinly.core.binding.command.BindingAction
@@ -75,6 +76,8 @@ class ChangeSecurityCodeViewModel(application: Application): BaseToolBarViewMode
                 "未绑定邮箱".show()
                 return
             }
+            imageCode.set("")
+            verifCode.set("")
             type.set(if (type.get() == 0) 1 else 0)
             accountName.set(if (type.get()==0) userData.mobile else userData.email)
         }
@@ -87,7 +90,10 @@ class ChangeSecurityCodeViewModel(application: Application): BaseToolBarViewMode
                 SystemApi().checkCode(typeStr, accountName.get()!!, verifCode.get()!!,
                     object : XinlyRxSubscriberHelper<BaseResp<Nothing>>() {
                         override fun _onNext(t: BaseResp<Nothing>) {
-                            "修改安全密码".show()
+                            val bundle = Bundle()
+                            bundle.putString(SetSecurityCodeActivity.EXTRAS_CODE, verifCode.get())
+                            startActivity(SetSecurityCodeActivity::class.java, bundle)
+                            finish()
                         }
 
                     }, lifecycleProvider)

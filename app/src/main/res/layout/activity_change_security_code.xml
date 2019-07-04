@@ -173,7 +173,7 @@
                 bind:onClickCommand="@{viewModel.switchClick}"
                 android:textColor="@color/font_black"
                 android:layout_gravity="center_horizontal"
-                android:text="@{(viewModel.type==0)?@string/user_phone_find:@string/user_email_find}"
+                android:text="@{(viewModel.type==0)?@string/user_email_find:@string/user_phone_find}"
                 android:drawableEnd="@drawable/arrow_right_black"
                 tools:text="使用邮箱找回"/>
     </LinearLayout>
