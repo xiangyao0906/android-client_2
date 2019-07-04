@@ -13,6 +13,7 @@ import com.xinly.dendrobe.R
 import com.xinly.dendrobe.helper.AccountManager
 import com.xinly.dendrobe.model.constans.Constans
 import com.xinly.dendrobe.model.vo.bean.UserBean
+import com.xinly.dendrobe.module.user.UserInfoEditActivity
 import com.xinly.dendrobe.util.PrefsUtils
 
 /**
@@ -38,11 +39,12 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     }
 
     //event
-    //跳转至设置界面
-    val jumpSettingsClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
+    //跳转至个人资料
+    val jumpUserInfoClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
         override fun call() {
-
+            startActivity(UserInfoEditActivity::class.java)
         }
+
     })
     //跳转至钱包界面
     val jumpWalletClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
@@ -53,7 +55,7 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     //复制邀请码
     val copyClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
-            userData.get()?.code?.copy()?.yes {
+            userData.get()?.code.toString().copy().yes {
                 "邀请码已复制到粘贴板".showAtCenter()
             }
 
@@ -77,7 +79,7 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     })
     //normal fun
     //余额显示隐藏切换
-    private fun pwdVisible() {
+    fun pwdVisible() {
         visibleIcon.set(if(pSwitch.get()) R.drawable.mine_balance_visible else R.drawable.mine_balance_invisible)
         balance.set(if (pSwitch.get()) userData.get()!!.bean else "******")
     }

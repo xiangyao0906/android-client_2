@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by zm on 2019-07-01.
  */
 public class UserBean implements Serializable, Cloneable {
-    private String code;
+    private int code;
     private String nickname; //昵称
     private String realname; //真实姓名
     private String identity; //身份证号码
@@ -26,11 +26,11 @@ public class UserBean implements Serializable, Cloneable {
         return (UserBean) super.clone();
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -114,7 +114,7 @@ public class UserBean implements Serializable, Cloneable {
         if (null != userBean.nickname) {
             this.nickname = userBean.nickname;
         }
-        if (null != userBean.code) {
+        if (0 != userBean.code) {
             this.code = userBean.code;
         }
         if (null != userBean.realname) {

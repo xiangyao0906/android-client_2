@@ -5,13 +5,14 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
-import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.show
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.api.FileApi
 import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
+import com.xinly.dendrobe.helper.AccountManager
+import com.xinly.dendrobe.model.vo.result.ChangeUserData
 import com.xinly.dendrobe.model.vo.result.UploadImageData
 import com.xinly.dendrobe.module.main.MainActivity
 
@@ -58,9 +59,11 @@ class BasicInfoViewModel(application: Application): BaseToolBarViewModel(applica
     //net
     //提交用户资料
     private fun submitData() {
-        UserApi().submitData(avatarUrl.get()!!, nickName.get()!!, password.get()!!, object : XinlyRxSubscriberHelper<BaseResp<Nothing>>(){
-            override fun _onNext(t: BaseResp<Nothing>) {
+        UserApi().submitData(avatarUrl.get()!!, nickName.get()!!, password.get()!!, object : XinlyRxSubscriberHelper<ChangeUserData>(){
+            override fun _onNext(t: ChangeUserData) {
                 startActivity(MainActivity::class.java)
+                AccountManager.instance.updateAccount(t.member)
+                finish()
             }
 
         }, lifecycleProvider)

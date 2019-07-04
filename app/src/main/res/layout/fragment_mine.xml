@@ -28,7 +28,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="16dp"
-                        bind:onClickCommand="@{viewModel.jumpSettingsClick}"
+                        bind:onClickCommand="@{viewModel.jumpUserInfoClick}"
                         android:src="@drawable/mine_settings"/>
 
                 <!-- 头像 -->
@@ -72,7 +72,7 @@
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="123456789"
-                        android:text="@{viewModel.userData.code}"
+                        android:text="@{String.valueOf(viewModel.userData.code)}"
                         android:layout_marginTop="10dp"
                         android:layout_below="@id/nickName"
                         android:layout_toEndOf="@id/invitationText"

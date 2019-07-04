@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.Observable
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.xinly.core.ext.showAtCenter
 import com.xinly.core.ui.fragment.BaseFragment
 import com.xinly.dendrobe.BR

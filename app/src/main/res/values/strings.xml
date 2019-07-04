@@ -1,7 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">九度石斛</string>
-    <string name="title_activity_splash">SplashActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- common -->
+    <string name="common_settings_no">未设置</string>
+
+    <!-- user -->
+    <string name="user_phone_input">请输入手机号码</string>
+    <string name="user_email_input">请输入邮箱账号</string>
 </resources>
