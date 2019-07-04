@@ -34,6 +34,9 @@ class SystemApi {
         // 获取首页信息
         @POST("api/service/config/index")
         fun configIndex(@Body requestBody: RequestBody): Observable<BaseResp<ConfigIndexData>>
+        // 检查数字验证码
+        @POST("api/service/verify/code/check")
+        fun checkCode(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
     }
 
     /**
@@ -58,6 +61,22 @@ class SystemApi {
     fun configIndex(subscriber: BaseSubscriber<ConfigIndexData>, lifecycleProvider: LifecycleProvider<*>) {
         api.configIndex(BaseRequestBody(null).toRequestBody())
             .convert()
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 检查数字验证码
+     * @param type 验证类型(mobile/email)
+     * @param target 验证对象
+     * @param code 验证码
+     */
+    fun checkCode(type: String, target: String, code: String, subscriber: BaseSubscriber<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
+        val params = HashMap<String, String>()
+        params["type"] = type
+        params["target"] = target
+        params["code"] = code
+        api.checkCode(BaseRequestBody(params).toRequestBody())
+            .handleResult()
             .execute(subscriber, lifecycleProvider)
     }
 }

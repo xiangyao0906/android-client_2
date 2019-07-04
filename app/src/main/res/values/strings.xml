@@ -1,10 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">九度石斛</string>
 
     <!-- common -->
-    <string name="common_settings_no">未设置</string>
+    <string name="common_settings_no" translatable="false">未设置</string>
 
     <!-- user -->
-    <string name="user_phone_input">请输入手机号码</string>
-    <string name="user_email_input">请输入邮箱账号</string>
+    <string name="user_phone_input" translatable="false">请输入手机号码</string>
+    <string name="user_email_input" translatable="false">请输入邮箱账号</string>
+    <string name="user_email_find" translatable="false">使用邮箱找回</string>
+    <string name="user_phone_find" translatable="false">使用手机找回</string>
 </resources>

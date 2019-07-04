@@ -59,6 +59,7 @@ class UserInfoEditViewModel(application: Application): BaseToolBarViewModel(appl
     //修改密码
     val updatePwdClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
+            startActivity(ChangeSecurityCodeActivity::class.java)
         }
 
     })

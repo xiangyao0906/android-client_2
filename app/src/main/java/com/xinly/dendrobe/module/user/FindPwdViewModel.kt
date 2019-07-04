@@ -130,7 +130,7 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     // 验证码倒计时
     @SuppressLint("CheckResult")
     private fun countdown() {
-        Flowable.intervalRange(0, 11, 0, 1, TimeUnit.SECONDS)
+        Flowable.intervalRange(0, 61, 0, 1, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .compose(lifecycleProvider.bindToLifecycle())
             .doOnNext {

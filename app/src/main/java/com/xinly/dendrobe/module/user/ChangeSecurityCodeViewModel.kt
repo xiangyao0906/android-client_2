@@ -11,24 +11,25 @@ import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.show
 import com.xinly.core.ext.showAtCenter
+import com.xinly.core.ext.yes
 import com.xinly.core.rx.BaseSubscriber
 import com.xinly.dendrobe.api.SystemApi
-import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.helper.AccountManager
-import com.xinly.dendrobe.model.vo.result.ChangeUserData
+import com.xinly.dendrobe.model.vo.bean.UserBean
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.ResponseBody
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by zm on 2019-07-04.
+ * Created by zm on 2019-07-01.
  */
-class AccountBindingViewModel(application: Application): BaseToolBarViewModel(application) {
-    // 绑定类型 0手机号码 1邮箱账号
-    val type by lazy { ObservableInt() }
+class ChangeSecurityCodeViewModel(application: Application): BaseToolBarViewModel(application) {
+    private lateinit var userData: UserBean
+    //找回类型 0手机修改 1邮箱修改
+    val type = ObservableInt()
     //账号绑定
     val accountName = ObservableField<String>()
     //图形码绑定
@@ -42,6 +43,11 @@ class AccountBindingViewModel(application: Application): BaseToolBarViewModel(ap
     override fun onCreate() {
         super.onCreate()
         initData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        imgCodeBmp.get()?.recycle()
     }
 
     //event
@@ -58,29 +64,33 @@ class AccountBindingViewModel(application: Application): BaseToolBarViewModel(ap
             requestImgCode()
         }
     })
-   
+    // 切换找回密码方式
+    val switchClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
+        override fun call() {
+            if (userData.mobile.isEmpty()) {
+                "未绑定手机".show()
+                return
+            }
+            if (userData.email.isEmpty()) {
+                "未绑定邮箱".show()
+                return
+            }
+            type.set(if (type.get() == 0) 1 else 0)
+            accountName.set(if (type.get()==0) userData.mobile else userData.email)
+        }
+    })
     // 下一步
     val nextClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-            if (checkParams()) {
-                if (type.get()==0){
-                    UserApi().changeMobile(accountName.get()!!, imageCode.get()!!, object : XinlyRxSubscriberHelper<ChangeUserData>(){
-                        override fun _onNext(t: ChangeUserData) {
-                            finish()
-                            AccountManager.instance.updateAccount(t.member)
+            checkParams().yes {
+                val typeStr = if (type.get()==0) "mobile" else "email"
+                SystemApi().checkCode(typeStr, accountName.get()!!, verifCode.get()!!,
+                    object : XinlyRxSubscriberHelper<BaseResp<Nothing>>() {
+                        override fun _onNext(t: BaseResp<Nothing>) {
+                            "修改安全密码".show()
                         }
 
                     }, lifecycleProvider)
-                }else {
-                    UserApi().changeEmail(accountName.get()!!, imageCode.get()!!, object : XinlyRxSubscriberHelper<ChangeUserData>(){
-                        override fun _onNext(t: ChangeUserData) {
-                            finish()
-                            AccountManager.instance.updateAccount(t.member)
-                        }
-
-                    }, lifecycleProvider)
-                }
-
             }
         }
     })
@@ -130,10 +140,15 @@ class AccountBindingViewModel(application: Application): BaseToolBarViewModel(ap
     }
     // 数据展示
     private fun initData() {
-        toolBarData.titleText = if (type.get() == 0) "绑定手机" else "绑定邮箱"
+        toolBarData.titleText = "修改安全密码"
         verifBtnText.set("获取验证码")
         verifBtnEnabled.set(true)
         requestImgCode()
+        userData = AccountManager.instance.getAccount()!!
+        userData.let {
+            type.set(if(it.mobile.isNotEmpty()) 0 else 1)
+            accountName.set(if (type.get()==0) it.mobile else it.email)
+        }
     }
     // 校验账号合法性
     private fun checkAccount(): Boolean {
