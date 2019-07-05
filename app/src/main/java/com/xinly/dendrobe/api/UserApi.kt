@@ -11,7 +11,7 @@ import com.xinly.dendrobe.component.data.BaseRequestBody
 import com.xinly.dendrobe.component.net.XinlyRequestManager
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.model.vo.result.ChangeUserData
-import com.xinly.dendrobe.model.vo.result.CurrencyRecordsData
+import com.xinly.dendrobe.model.vo.result.WalletRecordsData
 import com.xinly.dendrobe.model.vo.result.LoginData
 import com.xinly.dendrobe.model.vo.result.RegisterData
 import io.reactivex.Observable
@@ -67,10 +67,10 @@ class UserApi {
         fun reportCommit(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
         // 获取青豆记录
         @POST("api/user/wallet/log/bean")
-        fun getHaricotVertRecords(@Body requestBody: RequestBody): Observable<BaseResp<CurrencyRecordsData>>
+        fun getHaricotVertRecords(@Body requestBody: RequestBody): Observable<BaseResp<WalletRecordsData>>
         // 获取石斛记录
         @POST("api/user/wallet/log/dend")
-        fun getDendRecords(@Body requestBody: RequestBody): Observable<BaseResp<CurrencyRecordsData>>
+        fun getDendRecords(@Body requestBody: RequestBody): Observable<BaseResp<WalletRecordsData>>
     }
 
     /**
@@ -235,7 +235,7 @@ class UserApi {
      * @param paging 当前分页（从0开始）
      * @param limit 每页条数（不大于100）
      */
-    fun getHaricotVertRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<CurrencyRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
+    fun getHaricotVertRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<WalletRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
         val params = HashMap<String, Int>()
         params["paging"] = paging
         params["limit"] = limit
@@ -249,7 +249,7 @@ class UserApi {
      * @param paging 当前分页（从0开始）
      * @param limit 每页条数（不大于100）
      */
-    fun getDendRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<CurrencyRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
+    fun getDendRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<WalletRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
         val params = HashMap<String, Int>()
         params["paging"] = paging
         params["limit"] = limit

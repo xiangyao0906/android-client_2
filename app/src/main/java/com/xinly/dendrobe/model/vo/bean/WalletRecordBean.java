@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by zm on 2019-07-05.
  */
-public class CurrencyBean {
+public class WalletRecordBean {
 
     /**
      * content : 测试添加

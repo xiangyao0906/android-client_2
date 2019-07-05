@@ -85,7 +85,6 @@ class WalletViewModel(application: Application): BaseToolBarViewModel(applicatio
     //normal fun
     private fun initData() {
         toolBarData.titleText = "钱包"
-        type.set(true)
         userData.set(AccountManager.instance.getAccount())
         //密码显示隐藏
         val pwdVisible = PrefsUtils.getBoolean(Constans.SP_USER_BEAN_VISIBLE, true)
