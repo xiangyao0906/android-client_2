@@ -21,6 +21,8 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon,android:theme,android:roundIcon,android:label">
+        <activity android:name=".module.mine.wallet.WalletActivity">
+        </activity>
         <!-- 适配7.0 -->
         <provider
                 android:name="androidx.core.content.FileProvider"
@@ -39,8 +41,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <!-- 闪屏页 END -->
+        </activity> <!-- 闪屏页 END -->
         <!-- 账户操作 START -->
         <activity
                 android:name=".module.user.LoginRegisterActivity"
@@ -65,8 +66,7 @@
         <activity android:name=".module.user.InviterBindingActivity">
         </activity>
         <activity android:name=".module.user.SetSecurityCodeActivity">
-        </activity>
-        <!-- 账户操作 END -->
+        </activity> <!-- 账户操作 END -->
         <activity
                 android:name=".module.main.MainActivity"
                 android:launchMode="singleTask">

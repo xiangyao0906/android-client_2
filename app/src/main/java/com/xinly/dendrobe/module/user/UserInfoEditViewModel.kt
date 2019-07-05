@@ -4,6 +4,10 @@ import android.app.Application
 import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import com.hwangjr.rxbus.RxBus
+import com.hwangjr.rxbus.annotation.Subscribe
+import com.hwangjr.rxbus.annotation.Tag
+import com.hwangjr.rxbus.thread.EventThread
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.showAtCenter
@@ -12,6 +16,8 @@ import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.helper.AccountManager
+import com.xinly.dendrobe.model.constans.BusAction
+import com.xinly.dendrobe.model.vo.bean.Event
 import com.xinly.dendrobe.model.vo.bean.UserBean
 import com.xinly.dendrobe.model.vo.result.ChangeUserData
 import com.xinly.dendrobe.model.vo.result.UploadImageData
@@ -91,11 +97,20 @@ class UserInfoEditViewModel(application: Application): BaseToolBarViewModel(appl
     private fun changeAvatar(avatar: String) {
         UserApi().changeAvatar(avatar, object :XinlyRxSubscriberHelper<ChangeUserData>(){
             override fun _onNext(t: ChangeUserData) {
-                userData.set(t.member)
                 AccountManager.instance.updateAccount(t.member)
+                RxBus.get().post(BusAction.UPDATE_USER_INFO, Event.MessageEvent())
                 "头像更新成功".showAtCenter()
             }
 
         }, lifecycleProvider)
     }
+
+    /**
+     * 更新用户信息
+     */
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag(BusAction.UPDATE_USER_INFO)])
+    fun updateUserInfo(event: Event.MessageEvent) {
+        userData.set(AccountManager.instance.getAccount())
+    }
+
 }

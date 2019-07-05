@@ -3,10 +3,15 @@
 
     <!-- common -->
     <string name="common_settings_no" translatable="false">未设置</string>
+    <string name="common_invisible" translatable="false">******</string>
 
     <!-- user -->
     <string name="user_phone_input" translatable="false">请输入手机号码</string>
     <string name="user_email_input" translatable="false">请输入邮箱账号</string>
     <string name="user_email_find" translatable="false">使用邮箱找回</string>
     <string name="user_phone_find" translatable="false">使用手机找回</string>
+
+    <!-- 钱包 -->
+    <string name="wallet_mine_dend" translatable="false">我的石斛（株）</string>
+    <string name="wallet_mine_bean" translatable="false">我的青豆（个）</string>
 </resources>

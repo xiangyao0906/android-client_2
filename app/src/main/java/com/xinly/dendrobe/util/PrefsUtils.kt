@@ -39,6 +39,13 @@ object PrefsUtils {
     }
 
     /*
+        默认 true
+     */
+    fun getBoolean(key: String, defBoolean: Boolean): Boolean {
+        return sp.getBoolean(key, defBoolean)
+    }
+
+    /*
         String数据
      */
     fun putString(key: String, value: String) {

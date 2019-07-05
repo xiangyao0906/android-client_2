@@ -3,16 +3,21 @@ package com.xinly.dendrobe.module.mine
 import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import com.hwangjr.rxbus.annotation.Subscribe
+import com.hwangjr.rxbus.annotation.Tag
+import com.hwangjr.rxbus.thread.EventThread
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.copy
 import com.xinly.core.ext.showAtCenter
 import com.xinly.core.ext.yes
 import com.xinly.core.viewmodel.BaseViewModel
-import com.xinly.dendrobe.R
 import com.xinly.dendrobe.helper.AccountManager
+import com.xinly.dendrobe.model.constans.BusAction
 import com.xinly.dendrobe.model.constans.Constans
+import com.xinly.dendrobe.model.vo.bean.Event
 import com.xinly.dendrobe.model.vo.bean.UserBean
+import com.xinly.dendrobe.module.mine.wallet.WalletActivity
 import com.xinly.dendrobe.module.user.UserInfoEditActivity
 import com.xinly.dendrobe.util.PrefsUtils
 
@@ -25,20 +30,24 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     val userData by lazy { ObservableField<UserBean>() }
     //余额显示与隐藏
     val pSwitch by lazy { ObservableBoolean() }
-    val visibleIcon by lazy {ObservableField<Int>()}
-    val balance by lazy {ObservableField<String>()}
 
     override fun onCreate() {
         super.onCreate()
         //获取用户数据
         userData.set(AccountManager.instance.getAccount())
         //密码显示隐藏
-        val pwdVisible = PrefsUtils.getBoolean(Constans.SP_MINE_PASSWORD_VISIBLE)
+        val pwdVisible = PrefsUtils.getBoolean(Constans.SP_USER_BEAN_VISIBLE, true)
         pSwitch.set(pwdVisible)
-        pwdVisible()
     }
 
     //event
+    //跳转至设置界面
+    val jumpSettingsClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
+        override fun call() {
+            startActivity(UserInfoEditActivity::class.java)
+        }
+
+    })
     //跳转至个人资料
     val jumpUserInfoClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
         override fun call() {
@@ -49,7 +58,7 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     //跳转至钱包界面
     val jumpWalletClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
-
+            startActivity(WalletActivity::class.java)
         }
     })
     //复制邀请码
@@ -72,15 +81,17 @@ class MineViewModel(application: Application): BaseViewModel(application) {
         override fun call() {
             pSwitch.apply {
                 set(!get())
-                pwdVisible()
-                PrefsUtils.putBoolean(Constans.SP_MINE_PASSWORD_VISIBLE, get())
+                PrefsUtils.putBoolean(Constans.SP_USER_BEAN_VISIBLE, get())
             }
         }
     })
     //normal fun
-    //余额显示隐藏切换
-    fun pwdVisible() {
-        visibleIcon.set(if(pSwitch.get()) R.drawable.mine_balance_visible else R.drawable.mine_balance_invisible)
-        balance.set(if (pSwitch.get()) userData.get()!!.bean else "******")
+
+    /**
+     * 更新用户信息
+     */
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag(BusAction.UPDATE_USER_INFO)])
+    fun updateUserInfo(event: Event.MessageEvent) {
+        userData.set(AccountManager.instance.getAccount())
     }
 }

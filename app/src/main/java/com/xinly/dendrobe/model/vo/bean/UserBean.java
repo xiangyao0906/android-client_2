@@ -18,7 +18,7 @@ public class UserBean implements Serializable, Cloneable {
     private String email; //邮箱号码
     private String avatar; //邮箱地址
     private Double bean; //青豆数量
-    private String dend; //石斛数量
+    private Double dend; //石斛数量
     private long createTime;
     private UserBean inviteInfo;
 
@@ -100,10 +100,10 @@ public class UserBean implements Serializable, Cloneable {
     }
 
     public String getDend() {
-        return dend;
+        return BigDecimalUtils.format(dend, 2);
     }
 
-    public void setDend(String dend) {
+    public void setDend(Double dend) {
         this.dend = dend;
     }
 

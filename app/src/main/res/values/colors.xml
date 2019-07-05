@@ -17,4 +17,5 @@
     <color name="font_gray_light">#CCCCCC</color>
     <color name="font_blue_light">#228B9C</color>
     <color name="font_cyan">#228B9C</color>
+    <color name="font_orange">#F46B45</color>
 </resources>

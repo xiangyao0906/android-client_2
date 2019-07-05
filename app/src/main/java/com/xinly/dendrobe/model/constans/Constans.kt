@@ -15,5 +15,6 @@ object Constans{
     /*********************-Config END-************************/
 
     //SP键名
-    const val SP_MINE_PASSWORD_VISIBLE = "sp_mine_password_visible"
+    const val SP_USER_BEAN_VISIBLE = "sp_user_bean_visible"
+    const val SP_USER_DEND_VISIBLE = "sp_user_dend_visible"
 }

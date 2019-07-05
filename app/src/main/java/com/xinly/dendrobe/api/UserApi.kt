@@ -11,6 +11,7 @@ import com.xinly.dendrobe.component.data.BaseRequestBody
 import com.xinly.dendrobe.component.net.XinlyRequestManager
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.model.vo.result.ChangeUserData
+import com.xinly.dendrobe.model.vo.result.CurrencyRecordsData
 import com.xinly.dendrobe.model.vo.result.LoginData
 import com.xinly.dendrobe.model.vo.result.RegisterData
 import io.reactivex.Observable
@@ -64,6 +65,12 @@ class UserApi {
         // 意见反馈
         @POST("api/user/info/report/commit")
         fun reportCommit(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
+        // 获取青豆记录
+        @POST("api/user/wallet/log/bean")
+        fun getHaricotVertRecords(@Body requestBody: RequestBody): Observable<BaseResp<CurrencyRecordsData>>
+        // 获取石斛记录
+        @POST("api/user/wallet/log/dend")
+        fun getDendRecords(@Body requestBody: RequestBody): Observable<BaseResp<CurrencyRecordsData>>
     }
 
     /**
@@ -220,6 +227,34 @@ class UserApi {
 
         api.reportCommit(BaseRequestBody(params).toRequestBody())
             .handleResult()
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 获取青豆记录
+     * @param paging 当前分页（从0开始）
+     * @param limit 每页条数（不大于100）
+     */
+    fun getHaricotVertRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<CurrencyRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
+        val params = HashMap<String, Int>()
+        params["paging"] = paging
+        params["limit"] = limit
+        api.getHaricotVertRecords(BaseRequestBody(params).toRequestBody())
+            .convert()
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 获取石斛记录
+     * @param paging 当前分页（从0开始）
+     * @param limit 每页条数（不大于100）
+     */
+    fun getDendRecords(paging: Int, limit: Int, subscriber: XinlyRxSubscriberHelper<CurrencyRecordsData>, lifecycleProvider: LifecycleProvider<*>) {
+        val params = HashMap<String, Int>()
+        params["paging"] = paging
+        params["limit"] = limit
+        api.getDendRecords(BaseRequestBody(params).toRequestBody())
+            .convert()
             .execute(subscriber, lifecycleProvider)
     }
 }

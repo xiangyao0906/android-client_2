@@ -2,6 +2,7 @@ package com.xinly.dendrobe.module.user
 
 import android.app.Application
 import androidx.databinding.ObservableField
+import com.hwangjr.rxbus.RxBus
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.showAtCenter
@@ -10,6 +11,8 @@ import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.helper.AccountManager
+import com.xinly.dendrobe.model.constans.BusAction
+import com.xinly.dendrobe.model.vo.bean.Event
 import com.xinly.dendrobe.model.vo.result.ChangeUserData
 
 /**
@@ -33,6 +36,7 @@ class InviterBindingViewModel(application: Application): BaseToolBarViewModel(ap
                 UserApi().changeInvite(recommendId.get()!!, object :XinlyRxSubscriberHelper<ChangeUserData>(){
                     override fun _onNext(t: ChangeUserData) {
                         AccountManager.instance.updateAccount(t.member)
+                        RxBus.get().post(BusAction.UPDATE_USER_INFO, Event.MessageEvent())
                         finish()
                     }
 

@@ -3,6 +3,7 @@ package com.xinly.dendrobe
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDex
 import com.xinly.core.XinlyCore
 
 /**
@@ -20,5 +21,10 @@ class XinlyApplication: Application() {
         context = applicationContext
 
         XinlyCore.init(applicationContext)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

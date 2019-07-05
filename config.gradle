@@ -57,7 +57,7 @@ ext{
             "rxandroid"                 :   "io.reactivex.rxjava2:rxandroid:$version.rxAndroid_version",
             // rx系列与view生命周期同步
             "rxlifecycle-kotlin"        :   "com.trello.rxlifecycle3:rxlifecycle-kotlin:$version.rxlifecycleSdkVersion",
-            "rxlifecycle-component"    :   "com.trello.rxlifecycle3:rxlifecycle-components:$version.rxlifecycleSdkVersion",
+            "rxlifecycle-component"     :   "com.trello.rxlifecycle3:rxlifecycle-components:$version.rxlifecycleSdkVersion",
             // glide(图片加载)
             "glide"                     :   "com.github.bumptech.glide:glide:$version.glide_version",
             "glide-okhttp"              :   "com.github.bumptech.glide:okhttp3-integration:$version.glide_version",
@@ -69,7 +69,9 @@ ext{
             // logger
             "logger"                    :   "com.orhanobut:logger:2.2.0",
             // toast
-            "DToast"                    :   "com.github.Dovar66:DToast:1.1.5"
+            "DToast"                    :   "com.github.Dovar66:DToast:1.1.5",
+            // rxBus
+            "rxbus"                     :   "com.hwangjr.rxbus:rxbus:1.0.6"
     ]
 
     // kotlin 支持库

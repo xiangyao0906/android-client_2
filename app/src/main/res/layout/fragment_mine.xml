@@ -28,7 +28,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="16dp"
-                        bind:onClickCommand="@{viewModel.jumpUserInfoClick}"
+                        bind:onClickCommand="@{viewModel.jumpSettingsClick}"
                         android:src="@drawable/mine_settings"/>
 
                 <!-- 头像 -->
@@ -36,6 +36,7 @@
                         android:id="@+id/avatar"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
+                        bind:onClickCommand="@{viewModel.jumpUserInfoClick}"
                         bind:url="@{viewModel.userData.avatar}"
                         android:background="@drawable/user_avatar_def"
                         android:layout_marginTop="47dp"
@@ -101,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="30sp"
-                        android:text="@{viewModel.balance}"
+                        android:text="@{viewModel.PSwitch?viewModel.userData.bean:@string/common_invisible}"
                         tools:text="0.00"
                         android:layout_marginBottom="25dp"
                         android:layout_centerHorizontal="true"
@@ -118,8 +119,8 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="5dp"
                         android:paddingBottom="5dp"
-                        bind:src="@{viewModel.visibleIcon}"
-                        tools:src="@drawable/mine_balance_visible"/>
+                        android:src="@{viewModel.pSwitch?@drawable/icon_visible:@drawable/icon_invisible}"
+                        tools:src="@drawable/icon_visible"/>
 
 
                 <LinearLayout
