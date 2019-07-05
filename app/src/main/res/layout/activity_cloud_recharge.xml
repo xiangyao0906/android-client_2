@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data class="CloudRechargeBinding">
+        <variable name="viewModel" type="com.xinly.dendrobe.module.mine.wallet.recharge.CloudRechargeViewModel"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            tools:context=".module.mine.wallet.recharge.CloudRechargeActivity">
+
+            <include
+                    layout="@layout/layout_toolbar"
+                    bind:toolBar="@{viewModel}"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_black"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginStart="45dp"
+                    android:textSize="14sp"
+                    android:text="转入数量"/>
+
+            <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:src="@drawable/wallet_haricot_vert"/>
+
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:paddingStart="10dp"
+                        android:inputType="numberDecimal"
+                        android:paddingEnd="10dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="请输入转入的青豆数量"
+                        android:textColorHint="#CCCCCC"
+                        android:textSize="15sp"
+                        android:text="@={viewModel.beanNum}"
+                        android:textColor="@color/font_black"
+                        android:layout_height="wrap_content"
+                        android:background="@null"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#228B9C"
+                        android:layout_marginEnd="45dp"
+                        bind:onClickCommand="@{viewModel.allClick}"
+                        android:text="全部"/>
+            </LinearLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:layout_marginStart="45dp"
+              android:layout_marginEnd="45dp"
+              android:layout_marginTop="20dp"
+              android:background="@color/font_black"/>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="45dp"
+                android:orientation="horizontal">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_black"
+                    android:textSize="12sp"
+                    android:text="云仓天天拼余额"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@{viewModel.cloudNum}"
+                    android:textColor="@color/font_red_light"
+                    tools:text="100.00"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_black"
+                    android:textSize="12sp"
+                    android:text="青豆"/>
+        </LinearLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                bind:onClickCommand="@{viewModel.rechargeClick}"
+                android:layout_marginTop="82dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="确认转入"
+                android:layout_height="@dimen/btn_height"
+                android:background="@drawable/btn_bg_black"/>
+    </LinearLayout>
+</layout>

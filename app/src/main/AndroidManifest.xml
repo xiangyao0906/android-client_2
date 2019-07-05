@@ -21,9 +21,10 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon,android:theme,android:roundIcon,android:label">
-        <activity android:name=".module.mine.wallet.WalletActivity">
+        <activity android:name=".module.mine.wallet.recharge.CloudRechargeActivity">
         </activity>
-        <!-- 适配7.0 -->
+        <activity android:name=".module.mine.wallet.WalletActivity">
+        </activity> <!-- 适配7.0 -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.fileprovider"

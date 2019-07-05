@@ -11,6 +11,7 @@ import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.helper.AccountManager
 import com.xinly.dendrobe.model.constans.Constans
 import com.xinly.dendrobe.model.vo.bean.UserBean
+import com.xinly.dendrobe.module.mine.wallet.recharge.CloudRechargeActivity
 import com.xinly.dendrobe.util.PrefsUtils
 
 /**
@@ -55,6 +56,13 @@ class WalletViewModel(application: Application): BaseToolBarViewModel(applicatio
     val rechargeClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
         override fun call() {
 
+        }
+
+    })
+    //云仓转入
+    val cloudRechargeClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
+        override fun call() {
+            startActivity(CloudRechargeActivity::class.java)
         }
 
     })
