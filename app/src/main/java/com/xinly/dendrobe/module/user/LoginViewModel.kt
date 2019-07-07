@@ -8,6 +8,7 @@ import androidx.databinding.ObservableInt
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.show
+import com.xinly.core.helper.AppManager
 import com.xinly.core.viewmodel.BaseViewModel
 import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.component.net.TokenManager
@@ -114,10 +115,10 @@ class LoginViewModel(application: Application): BaseViewModel(application) {
                 // 信息是否完整
                 if (AccountManager.instance.isLogin()) {
                     startActivity(MainActivity::class.java)
+                    AppManager.instance.finishAllActivity()
                 }else{
                     startActivity(BasicInfoActivity::class.java)
                 }
-                finish()
             }
 
         },lifecycleProvider)

@@ -3,13 +3,16 @@ package com.xinly.dendrobe.module.mine.wallet
 import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import com.hwangjr.rxbus.RxBus
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
 import com.xinly.core.ext.no
 import com.xinly.core.ext.yes
 import com.xinly.dendrobe.base.BaseToolBarViewModel
 import com.xinly.dendrobe.helper.AccountManager
+import com.xinly.dendrobe.model.constans.BusAction
 import com.xinly.dendrobe.model.constans.Constans
+import com.xinly.dendrobe.model.vo.bean.Event
 import com.xinly.dendrobe.model.vo.bean.UserBean
 import com.xinly.dendrobe.module.mine.wallet.recharge.CloudRechargeActivity
 import com.xinly.dendrobe.util.PrefsUtils
@@ -80,6 +83,7 @@ class WalletViewModel(application: Application): BaseToolBarViewModel(applicatio
                 type.get().yes { //青豆
                     set(!get())
                     PrefsUtils.putBoolean(Constans.SP_USER_BEAN_VISIBLE, get())
+                    RxBus.get().post(BusAction.UPDATE_BEAN_VISIBLE, Event.UpdateBeanIsVisivle(get()))
                 }
                type.get().no { //石斛
                    set(!get())

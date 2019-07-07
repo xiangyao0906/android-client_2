@@ -5,8 +5,8 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
-import com.xinly.core.ext.show
 import com.xinly.core.ext.showAtCenter
+import com.xinly.core.helper.AppManager
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.api.FileApi
 import com.xinly.dendrobe.api.UserApi
@@ -64,7 +64,7 @@ class BasicInfoViewModel(application: Application): BaseToolBarViewModel(applica
             override fun _onNext(t: ChangeUserData) {
                 startActivity(MainActivity::class.java)
                 AccountManager.instance.updateAccount(t.member)
-                finish()
+                AppManager.instance.finishAllActivity()
             }
 
         }, lifecycleProvider)

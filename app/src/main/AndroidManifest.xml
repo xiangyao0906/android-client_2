@@ -21,10 +21,8 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon,android:theme,android:roundIcon,android:label">
-        <activity android:name=".module.mine.wallet.recharge.CloudRechargeActivity">
-        </activity>
-        <activity android:name=".module.mine.wallet.WalletActivity">
-        </activity> <!-- 适配7.0 -->
+
+        <!-- 适配7.0 -->
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.fileprovider"
@@ -33,7 +31,9 @@
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths_public"/>
-        </provider> <!-- 闪屏页 START -->
+        </provider>
+
+        <!-- 闪屏页 START -->
         <activity
                 android:name=".module.launch.SplashActivity"
                 android:theme="@style/Splash.FullScreen.AppTheme">
@@ -42,36 +42,40 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity> <!-- 闪屏页 END -->
+        </activity>
+        <!-- 闪屏页 END -->
+
         <!-- 账户操作 START -->
         <activity
                 android:name=".module.user.LoginRegisterActivity"
-                android:theme="@style/FullScreen.AppTheme">
-        </activity>
-        <activity android:name=".module.user.LoginActivity">
-        </activity>
-        <activity android:name=".module.user.RegisterActivity">
-        </activity>
-        <activity android:name=".module.user.FindPasswordActivity">
-        </activity>
-        <activity android:name=".module.user.SetPasswordActivity">
-        </activity>
-        <activity android:name=".module.user.BasicInfoActivity">
-        </activity>
-        <activity android:name=".module.user.AccountBindingActivity">
-        </activity>
-        <activity android:name=".module.user.UserInfoEditActivity">
-        </activity>
-        <activity android:name=".module.user.ChangeSecurityCodeActivity">
-        </activity>
-        <activity android:name=".module.user.InviterBindingActivity">
-        </activity>
-        <activity android:name=".module.user.SetSecurityCodeActivity">
-        </activity> <!-- 账户操作 END -->
+                android:theme="@style/FullScreen.AppTheme"/>
+        <activity android:name=".module.user.LoginActivity"/>
+        <activity android:name=".module.user.RegisterActivity"/>
+        <activity android:name=".module.user.FindPasswordActivity"/>
+        <activity android:name=".module.user.SetPasswordActivity"/>
+        <activity android:name=".module.user.BasicInfoActivity"/>
+        <activity android:name=".module.user.AccountBindingActivity"/>
+        <activity android:name=".module.user.UserInfoEditActivity"/>
+        <activity android:name=".module.user.ChangeSecurityCodeActivity"/>
+        <activity android:name=".module.user.InviterBindingActivity"/>
+        <activity android:name=".module.user.SetSecurityCodeActivity"/>
+        <!-- 账户操作 END -->
+
+        <!-- 主页 START -->
         <activity
                 android:name=".module.main.MainActivity"
-                android:launchMode="singleTask">
-        </activity>
+                android:launchMode="singleTask"/>
+        <!-- 主页 END -->
+
+        <!-- 钱包 START -->
+        <activity android:name=".module.mine.wallet.recharge.CloudRechargeActivity"/>
+        <activity android:name=".module.mine.wallet.WalletActivity"/>
+        <!-- 钱包 END -->
+
+        <!-- 设置 START -->
+        <activity android:name=".module.mine.settings.SettingsActivity"/>
+        <!-- 设置 END -->
+
         <activity android:name="com.matisse.ui.view.MatisseActivity">
         </activity>
     </application>

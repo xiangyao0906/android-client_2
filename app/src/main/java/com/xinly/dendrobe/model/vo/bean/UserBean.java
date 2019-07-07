@@ -23,7 +23,7 @@ public class UserBean implements Serializable, Cloneable {
     private UserBean inviteInfo;
 
     @Override
-    protected UserBean clone() throws CloneNotSupportedException {
+    public UserBean clone() throws CloneNotSupportedException {
         return (UserBean) super.clone();
     }
 

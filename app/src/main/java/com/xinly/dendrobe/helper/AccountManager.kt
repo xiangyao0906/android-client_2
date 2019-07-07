@@ -62,7 +62,7 @@ class AccountManager private constructor(){
         if (mUserBean == null) {
             initAccount()
         }
-        return mUserBean
+        return mUserBean!!.clone()
     }
 
     private fun getAccountName(): String? {

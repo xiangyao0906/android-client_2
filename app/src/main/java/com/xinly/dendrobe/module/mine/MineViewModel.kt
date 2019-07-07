@@ -17,6 +17,7 @@ import com.xinly.dendrobe.model.constans.BusAction
 import com.xinly.dendrobe.model.constans.Constans
 import com.xinly.dendrobe.model.vo.bean.Event
 import com.xinly.dendrobe.model.vo.bean.UserBean
+import com.xinly.dendrobe.module.mine.settings.SettingsActivity
 import com.xinly.dendrobe.module.mine.wallet.WalletActivity
 import com.xinly.dendrobe.module.user.UserInfoEditActivity
 import com.xinly.dendrobe.util.PrefsUtils
@@ -44,7 +45,7 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     //跳转至设置界面
     val jumpSettingsClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
         override fun call() {
-            startActivity(UserInfoEditActivity::class.java)
+            startActivity(SettingsActivity::class.java)
         }
 
     })
@@ -93,5 +94,13 @@ class MineViewModel(application: Application): BaseViewModel(application) {
     @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag(BusAction.UPDATE_USER_INFO)])
     fun updateUserInfo(event: Event.MessageEvent) {
         userData.set(AccountManager.instance.getAccount())
+    }
+
+    /**
+     * 更新余额是否隐藏
+     */
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag(BusAction.UPDATE_BEAN_VISIBLE)])
+    fun updatePwdVisible(event: Event.UpdateBeanIsVisivle) {
+        pSwitch.set(event.isVisible)
     }
 }

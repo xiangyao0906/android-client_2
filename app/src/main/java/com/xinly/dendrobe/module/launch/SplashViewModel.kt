@@ -22,12 +22,13 @@ class SplashViewModel(application: Application): BaseViewModel(application) {
     fun autoLogin() {
         Flowable.timer(2, TimeUnit.SECONDS)
             .subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
             .compose(lifecycleProvider.bindToLifecycle())
             .doOnComplete {
                 if (AccountManager.instance.isLogin()) {
                     startActivity(MainActivity::class.java)
                     finish()
-                }else {
+                } else {
                     startActivity(LoginRegisterActivity::class.java)
                     finish()
                 }

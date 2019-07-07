@@ -98,6 +98,7 @@ class UserInfoEditViewModel(application: Application): BaseToolBarViewModel(appl
         UserApi().changeAvatar(avatar, object :XinlyRxSubscriberHelper<ChangeUserData>(){
             override fun _onNext(t: ChangeUserData) {
                 AccountManager.instance.updateAccount(t.member)
+                userData.set(AccountManager.instance.getAccount())
                 RxBus.get().post(BusAction.UPDATE_USER_INFO, Event.MessageEvent())
                 "头像更新成功".showAtCenter()
             }
