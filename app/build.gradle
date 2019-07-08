@@ -68,4 +68,6 @@ dependencies {
     implementation 'com.jungly:gridPasswordView:0.3'
     // 上拉加载
     implementation rootProject.ext.dependencies["smartrefresh"]
+    //material dialog {link https://github.com/afollestad/material-dialogs}
+    implementation 'com.afollestad.material-dialogs:core:3.1.0'
 }

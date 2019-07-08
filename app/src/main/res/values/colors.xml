@@ -3,6 +3,7 @@
     <color name="colorPrimary">#082125</color>
     <color name="colorPrimaryDark">#082125</color>
     <color name="colorAccent">#082125</color>
+    <color name="transparent">#00000000</color>
 
     <!-- 灰色 -->
     <color name="gray_light">#EAEAEA</color>
@@ -19,4 +20,5 @@
     <color name="font_cyan">#228B9C</color>
     <color name="font_orange">#F46B45</color>
     <color name="font_red_light">#F04C4D</color>
+    <color name="font_red">#FF0000</color>
 </resources>

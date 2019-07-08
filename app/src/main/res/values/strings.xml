@@ -14,4 +14,5 @@
     <!-- 钱包 -->
     <string name="wallet_mine_dend" translatable="false">我的石斛（株）</string>
     <string name="wallet_mine_bean" translatable="false">我的青豆（个）</string>
+    <string name="title_activity_c2_ctrader">C2CTraderActivity</string>
 </resources>

@@ -38,6 +38,9 @@ class UserApi {
         // 登陆
         @POST("api/user/auth/login/commit")
         fun login(@Body requestBody: RequestBody): Observable<BaseResp<LoginData>>
+        // 退出登录
+        @POST("api/user/auth/logout/commit")
+        fun logout(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
         // 重置密码
         @POST("api/user/auth/reset/clear")
         fun reset(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
@@ -255,6 +258,15 @@ class UserApi {
         params["limit"] = limit
         api.getDendRecords(BaseRequestBody(params).toRequestBody())
             .convert()
+            .execute(subscriber, lifecycleProvider)
+    }
+
+    /**
+     * 退出登录
+     */
+    fun logout(subscriber: XinlyRxSubscriberHelper<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
+        api.logout(BaseRequestBody(null).toRequestBody())
+            .handleResult()
             .execute(subscriber, lifecycleProvider)
     }
 }

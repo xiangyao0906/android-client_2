@@ -8,4 +8,6 @@ object BusAction {
     const val UPDATE_USER_INFO = "update_user_info"
     // 更新青豆是否显示
     const val UPDATE_BEAN_VISIBLE = "update_bean_visible"
+    // 银行卡添加成功
+    const val BANK_ADD_SUCCESS = "bank_add_success"
 }

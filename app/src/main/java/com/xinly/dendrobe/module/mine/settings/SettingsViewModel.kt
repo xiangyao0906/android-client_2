@@ -4,9 +4,13 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import com.xinly.core.binding.command.BindingAction
 import com.xinly.core.binding.command.BindingCommand
+import com.xinly.core.data.protocol.BaseResp
 import com.xinly.core.ext.showAtCenter
+import com.xinly.core.net.exception.ApiException
 import com.xinly.dendrobe.BuildConfig
+import com.xinly.dendrobe.api.UserApi
 import com.xinly.dendrobe.base.BaseToolBarViewModel
+import com.xinly.dendrobe.component.net.XinlyRxSubscriberHelper
 import com.xinly.dendrobe.helper.AccountManager
 
 /**
@@ -24,7 +28,18 @@ class SettingsViewModel(application: Application): BaseToolBarViewModel(applicat
 
     //net
     private fun logout() {
-        AccountManager.instance.logout()
+        UserApi().logout(object : XinlyRxSubscriberHelper<BaseResp<Nothing>>(){
+            override fun _onNext(t: BaseResp<Nothing>) {
+                "登出成功".showAtCenter()
+                AccountManager.instance.logout()
+            }
+
+            override fun _onError(apiException: ApiException) {
+                super._onError(apiException)
+                AccountManager.instance.logout()
+            }
+        }, lifecycleProvider)
+
     }
 
     //normal fun
@@ -37,7 +52,6 @@ class SettingsViewModel(application: Application): BaseToolBarViewModel(applicat
     //退出登录
     val logout: BindingCommand<Nothing> = BindingCommand(object : BindingAction{
         override fun call() {
-            "退出登录成功".showAtCenter()
             logout()
         }
 

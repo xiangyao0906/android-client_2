@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/bankbg"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:background="@drawable/bank_card_common_bg">
+
+    <ImageView
+            android:id="@+id/bankIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="14dp"
+            tools:src="@drawable/bank_union_pay_icon"/>
+
+    <TextView
+            android:id="@+id/bankName"
+            android:layout_toEndOf="@id/bankIcon"
+            android:layout_alignTop="@id/bankIcon"
+            android:layout_marginStart="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            tools:text="银联"/>
+
+    <TextView
+            android:id="@+id/bankType"
+            android:layout_alignStart="@id/bankName"
+            android:layout_below="@id/bankName"
+            android:layout_width="wrap_content"
+            android:layout_alignBottom="@id/bankIcon"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="银联"/>
+
+    <ImageView
+            android:id="@+id/bankBgIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            tools:src="@drawable/bank_union_pay_icon2"/>
+
+    <TextView
+            android:id="@+id/bankCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:layout_marginEnd="13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            tools:text="**** **** **** 1745"/>
+</RelativeLayout>

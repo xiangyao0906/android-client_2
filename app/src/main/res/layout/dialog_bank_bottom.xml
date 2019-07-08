@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bank_bg_white"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/setDefault"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/font_black"
+                android:text="设为默认"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="#DFDFDF"/>
+
+        <TextView
+                android:id="@+id/deleteBank"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/font_red"
+                android:text="删除银行卡"/>
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bank_bg_white"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/font_black"
+            android:text="取消"/>
+</LinearLayout>

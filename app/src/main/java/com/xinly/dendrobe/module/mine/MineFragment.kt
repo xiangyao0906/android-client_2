@@ -3,19 +3,16 @@ package com.xinly.dendrobe.module.mine
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.Observable
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.xinly.core.ext.showAtCenter
 import com.xinly.core.ui.fragment.BaseFragment
 import com.xinly.dendrobe.BR
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.base.BaseRecyclerViewAdapter
 import com.xinly.dendrobe.databinding.MineBinding
-import com.xinly.dendrobe.helper.AccountManager
-import com.xinly.dendrobe.model.constans.Constans
 import com.xinly.dendrobe.model.vo.bean.MenuBean
-import com.xinly.dendrobe.util.PrefsUtils
+import com.xinly.dendrobe.module.mine.bank.BankActivity
+import com.xinly.dendrobe.module.trader.C2CTraderActivity
 
 /**
  * 我的
@@ -48,7 +45,11 @@ class MineFragment : BaseFragment<MineBinding, MineViewModel>() {
         mAdapter = MenuAdapter(context!!)
         mAdapter.mItemClickListener = object : BaseRecyclerViewAdapter.OnItemClickListener<MenuBean>{
             override fun onItemClick(item: MenuBean, position: Int) {
-                "该功能暂未开放".showAtCenter()
+                when(position){
+                    2 -> startActivity(C2CTraderActivity::class.java)
+                    3 -> startActivity(BankActivity::class.java)
+                    else -> "该功能暂未开放".showAtCenter()
+                }
             }
         }
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
