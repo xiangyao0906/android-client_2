@@ -8,6 +8,7 @@ import com.xinly.core.net.exception.ApiException
 import com.xinly.core.net.exception.ExceptionEngine
 import com.xinly.core.utils.ThrowableUtil
 import com.xinly.dendrobe.component.data.ResultCode
+import com.xinly.dendrobe.helper.AccountManager
 import io.reactivex.exceptions.CompositeException
 
 /**
@@ -60,6 +61,10 @@ abstract class XinlyRxSubscriberHelper<T>(context: Context? = null, isShowLoad: 
      */
     private fun onUpgradeError(apiException: ApiException) {
 
+    }
+
+    override fun onPermissionError(apiException: ApiException) {
+        AccountManager.instance.logout()
     }
 
     /**

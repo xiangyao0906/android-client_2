@@ -13,5 +13,142 @@
         <include
                 layout="@layout/layout_toolbar"
                 bind:toolBar="@{viewModel}"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="14dp"
+                    bind:onClickCommand="@{viewModel.verHistoryCLick}"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/font_black"
+                        android:text="版本号"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/font_gray"
+                        android:textSize="13sp"
+                        tools:text="v1.0.0"
+                        android:text="@{viewModel.versionName}"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/arrow_right_black"/>
+            </LinearLayout>
+
+            <include layout="@layout/layout_line"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="14dp"
+                    bind:onClickCommand="@{viewModel.feedbackClick}"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/font_black"
+                        android:text="建议反馈"/>
+
+                <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/font_gray"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/arrow_right_black"/>
+            </LinearLayout>
+
+            <include layout="@layout/layout_line"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="14dp"
+                    bind:onClickCommand="@{viewModel.aboutUsClick}"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/font_black"
+                        android:text="关于我们"/>
+
+                <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/font_gray"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/arrow_right_black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="14dp"
+                bind:onClickCommand="@{viewModel.clearCache}"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/font_black"
+                    android:text="清理缓存"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/font_gray"
+                    android:textSize="13sp"
+                    tools:text="(0.00MB)"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:textSize="17sp"
+                bind:onClickCommand="@{viewModel.logout}"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="80dp"
+                android:textColor="@color/font_black"
+                android:background="@drawable/btn_bg_white"
+                android:text="退出登录"/>
     </LinearLayout>
 </layout>
