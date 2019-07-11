@@ -45,7 +45,7 @@ class AddBankViewModel(application: Application): BaseToolBarViewModel(applicati
             "请输入银行卡号".showAtCenter()
             return false
         }
-        if (bankCard.get()!!.length != 16) {
+        if (bankCard.get()!!.length < 16 || bankCard.get()!!.length>19) {
             "请输入正确的银行卡号".showAtCenter()
             return false
         }

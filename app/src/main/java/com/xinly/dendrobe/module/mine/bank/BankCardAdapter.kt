@@ -30,7 +30,10 @@ class BankCardAdapter(context: Context): BaseRecyclerViewAdapter<BankBean, BankC
         holder.itemView.bankName.text = model.bankName
         holder.itemView.bankType.text = "储蓄卡"
         //银行卡
-        holder.itemView.bankCode.text = "**** **** **** ".plus(model.bankCode.substring(12..15))
+        val bankCard = model.bankCode
+        holder.itemView.bankCode.text = "".plus(bankCard.substring(0..3))
+            .plus(" **** **** ")
+            .plus(bankCard.substring(bankCard.length-4 until bankCard.length))
         holder.itemView.bankDef.text = if (model.flag == 1)"默认" else ""
 
         when(model.bankName) {

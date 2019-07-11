@@ -53,18 +53,9 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
             bankList.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     binding.refreshLayout.isRefreshing = false
-                    val defId = PrefsUtils.getInt(Constans.SP_USER_DEF_BANK_CARD)
                     bankList.get()?.let {
-                        it.forEach { item ->
-                            if (item.id == defId){
-                                item.flag = 1
-                            }
-                        }
-                        it.sortByDescending { bankBean ->
-                            bankBean.flag
-                        }
                         bankIsEmpty.set(it.size==0)
-                        mAdapter.setData(it)
+                        mAdapter.setData(convertList(it))
                     }
                 }
 
@@ -78,11 +69,31 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
         }
     }
 
+    private fun convertList(dataList: List<BankBean>): MutableList<BankBean> {
+        val newList: MutableList<BankBean> = dataList as MutableList<BankBean>
+        if (newList.isEmpty()) return newList
+        // 获取默认银行卡id
+        val defId = PrefsUtils.getInt(Constans.SP_USER_DEF_BANK_CARD)
+        // 默认银行卡标志
+        val defFlag = newList.any { defId == it.id }
+        if (!defFlag) {
+            newList.first().flag = 1
+            PrefsUtils.putInt(Constans.SP_USER_DEF_BANK_CARD, newList.first().id)
+        }else{
+            newList.first { defId == it.id }.flag = 1
+        }
+        newList.sortByDescending { it.flag }
+        return newList
+    }
+
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun showBottomDialog(item: BankBean, position: Int) {
         object : BankCardBottomView(this, item){
             override fun deleteBankCard() {
+                mAdapter.dataList.removeAt(position)
+                mAdapter.setData(convertList(mAdapter.dataList), false)
                 mAdapter.notifyItemRemoved(position)
+                mAdapter.notifyItemChanged(0)
             }
 
             override fun setDefaultBankCard() {

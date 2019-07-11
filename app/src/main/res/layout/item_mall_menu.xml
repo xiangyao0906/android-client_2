@@ -7,13 +7,14 @@
 
     <ImageView
             android:id="@+id/menuIcon"
-            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="6dp"
             android:layout_width="70dp"
             android:layout_height="70dp"/>
 
     <TextView
             android:id="@+id/menuName"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="5dp"
             android:textSize="12sp"
             android:textColor="@color/font_black"
             android:layout_width="wrap_content"

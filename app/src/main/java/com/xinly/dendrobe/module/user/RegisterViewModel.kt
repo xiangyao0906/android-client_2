@@ -160,7 +160,7 @@ class RegisterViewModel(application: Application) : BaseToolBarViewModel(applica
             .compose(lifecycleProvider.bindToLifecycle())
             .doOnNext {
                 verifBtnEnabled.set(false)
-                verifBtnText.set("重新获取(${10-it})")
+                verifBtnText.set("重新获取(${60-it})")
             }
             .doOnComplete {
                 verifBtnText.set("获取验证码")

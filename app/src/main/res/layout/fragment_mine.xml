@@ -15,6 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
+
             <RelativeLayout
                     android:id="@+id/rl_user_info"
                     android:layout_width="match_parent"
@@ -31,69 +32,75 @@
                         bind:onClickCommand="@{viewModel.jumpSettingsClick}"
                         android:src="@drawable/mine_settings"/>
 
-                <!-- 头像 -->
-                <ImageView
-                        android:id="@+id/avatar"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                <RelativeLayout
                         bind:onClickCommand="@{viewModel.jumpUserInfoClick}"
-                        bind:url="@{viewModel.userData.avatar}"
-                        android:background="@drawable/user_avatar_def"
-                        android:layout_marginTop="47dp"
-                        android:layout_marginStart="28dp"/>
-
-                <!-- 昵称 -->
-                <TextView
-                        android:id="@+id/nickName"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="昵称"
-                        android:text="@{viewModel.userData.nickname}"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="13dp"
-                        android:layout_toEndOf="@id/avatar"
-                        android:layout_alignTop="@id/avatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/invitationText"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:text="邀请码："
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@id/nickName"
-                        android:layout_alignStart="@id/nickName"
-                        android:layout_toEndOf="@id/avatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/invitationCode"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        tools:text="123456789"
-                        android:text="@{String.valueOf(viewModel.userData.code)}"
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@id/nickName"
-                        android:layout_toEndOf="@id/invitationText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <!-- 复制-->
-                <TextView
-                        android:id="@+id/copy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:drawablePadding="5dp"
-                        android:drawableStart="@drawable/mine_copy"
-                        bind:onClickCommand="@{viewModel.copyClick}"
-                        android:layout_marginStart="10dp"
-                        android:layout_alignBaseline="@id/invitationCode"
-                        android:layout_toEndOf="@id/invitationCode"
-                        android:text="复制"/>
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="47dp">
+
+                    <!-- 头像 -->
+                    <ImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            bind:url="@{viewModel.userData.avatar}"
+                            android:background="@drawable/user_avatar_def"/>
+
+                    <!-- 昵称 -->
+                    <TextView
+                            android:id="@+id/nickName"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:text="昵称"
+                            android:text="@{viewModel.userData.nickname}"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_toEndOf="@id/avatar"
+                            android:layout_alignTop="@id/avatar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:id="@+id/invitationText"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:text="邀请码："
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/nickName"
+                            android:layout_alignStart="@id/nickName"
+                            android:layout_toEndOf="@id/avatar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:id="@+id/invitationCode"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            tools:text="123456789"
+                            android:text="@{String.valueOf(viewModel.userData.code)}"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/nickName"
+                            android:layout_toEndOf="@id/invitationText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <!-- 复制-->
+                    <TextView
+                            android:id="@+id/copy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:drawablePadding="5dp"
+                            android:padding="10dp"
+                            android:drawableStart="@drawable/mine_copy"
+                            bind:onClickCommand="@{viewModel.copyClick}"
+                            android:layout_alignBaseline="@id/invitationCode"
+                            android:layout_toEndOf="@id/invitationCode"
+                            android:text="复制"/>
+                </RelativeLayout>
+
 
                 <!-- 余额 -->
                 <TextView
@@ -150,16 +157,6 @@
                           android:layout_weight="1"
                           android:layout_height="0dp"/>
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            bind:onClickCommand="@{viewModel.viewBill}"
-                            android:layout_marginEnd="15dp"
-                            android:drawablePadding="5dp"
-                            android:drawableEnd="@drawable/arrow_right_white"
-                            android:text="查看账单"/>
                 </LinearLayout>
             </RelativeLayout>
 

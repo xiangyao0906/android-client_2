@@ -20,9 +20,11 @@ abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var mCon
         设置数据
         Presenter处理过为null的情况，所以为不会为Null
      */
-    fun setData(sources: MutableList<T>) {
+    fun setData(sources: MutableList<T>, isRefresh: Boolean = true) {
         dataList = sources
-        notifyDataSetChanged()
+        if (isRefresh) {
+            notifyDataSetChanged()
+        }
     }
 
     /**

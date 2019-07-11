@@ -27,6 +27,8 @@ import java.util.concurrent.TimeUnit
  * Created by zm on 2019-07-01.
  */
 class FindPwdViewModel(application: Application): BaseToolBarViewModel(application) {
+    //找回类型 0手机找回 1邮箱找回
+    val findType = ObservableInt(0)
     //账号绑定
     val accountName = ObservableField<String>()
     val accountHint = ObservableField<String>()
@@ -52,13 +54,6 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
         imgCodeBmp.get()?.recycle()
     }
 
-    //封装一个界面发生改变的观察者
-    val uic: UIChangeObservable = UIChangeObservable()
-    class UIChangeObservable {
-        //找回类型 0手机找回 1邮箱找回
-        val findType = ObservableInt(0)
-    }
-
     //event
     // 登陆
     // 发送验证码事件
@@ -76,7 +71,11 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     // 切换找回密码方式
     val switchClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
-            uic.findType.set(if (uic.findType.get() == 0) 1 else 0)
+            findType.set(if (findType.get() == 0) 1 else 0)
+            // 清除输入数据
+            accountName.set("")
+            imageCode.set("")
+            verifCode.set("")
             showData()
         }
     })
@@ -84,11 +83,11 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     val nextClick: BindingCommand<Nothing> = BindingCommand(object: BindingAction {
         override fun call() {
            if (checkParams()) {
-               val type = if (uic.findType.get()==0)"mobile" else "email"
+               val type = if (findType.get()==0)"mobile" else "email"
                UserApi().reset(type, accountName.get()!!, imageCode.get()!!, object :XinlyRxSubscriberHelper<BaseResp<Nothing>>(){
                     override fun _onNext(t: BaseResp<Nothing>) {
                         val bundle = Bundle()
-                        bundle.putInt(FindPasswordActivity.EXTRAS_FIND_TYPE, uic.findType.get())
+                        bundle.putInt(FindPasswordActivity.EXTRAS_FIND_TYPE, findType.get())
                         bundle.putString(FindPasswordActivity.EXTRAS_FIND_ACCOUNT, accountName.get())
                         startActivity(SetPasswordActivity::class.java, bundle)
                         finish()
@@ -112,7 +111,7 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     private fun sendCode() {
         if (checkAccount()&&checkImgCode()) {
             val params = HashMap<String, String>()
-            params["type"] = if (uic.findType.get()==0)"mobile" else "email"
+            params["type"] = if (findType.get()==0)"mobile" else "email"
             params["target"] = accountName.get()!!
             params["code"] = imageCode.get()!!
 
@@ -135,7 +134,7 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
             .compose(lifecycleProvider.bindToLifecycle())
             .doOnNext {
                 verifBtnEnabled.set(false)
-                verifBtnText.set("重新获取(${10-it})")
+                verifBtnText.set("重新获取(${60-it})")
             }
             .doOnComplete {
                 verifBtnText.set("获取验证码")
@@ -145,16 +144,16 @@ class FindPwdViewModel(application: Application): BaseToolBarViewModel(applicati
     // 数据展示
     private fun showData() {
         toolBarData.titleText = "找回密码"
-        accountHint.set(if (uic.findType.get() == 0) "请输入手机号码" else "请输入邮箱账号")
-        switchFindPwdText.set(if (uic.findType.get() == 0) "使用邮箱找回" else "使用手机找回")
-        accountIcon.set(if (uic.findType.get() == 0) R.drawable.reg_mobile else R.drawable.reg_email)
+        accountHint.set(if (findType.get() == 0) "请输入手机号码" else "请输入邮箱账号")
+        switchFindPwdText.set(if (findType.get() == 0) "使用邮箱找回" else "使用手机找回")
+        accountIcon.set(if (findType.get() == 0) R.drawable.reg_mobile else R.drawable.reg_email)
         verifBtnText.set("获取验证码")
         verifBtnEnabled.set(true)
     }
     // 校验账号合法性
     private fun checkAccount(): Boolean {
         if (accountName.get().isNullOrEmpty()){
-            val accountHint: String = if (uic.findType.get()==0) "请输入手机号码" else "请输入邮箱账号"
+            val accountHint: String = if (findType.get()==0) "请输入手机号码" else "请输入邮箱账号"
             accountHint.show()
             return false
         }

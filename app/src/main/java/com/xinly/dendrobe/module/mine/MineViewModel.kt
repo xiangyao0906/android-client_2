@@ -71,12 +71,6 @@ class MineViewModel(application: Application): BaseViewModel(application) {
 
         }
     })
-    //查看账单
-    val viewBill: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
-        override fun call() {
-
-        }
-    })
     //余额是否显示
     val passwordShowSwitchOnClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
