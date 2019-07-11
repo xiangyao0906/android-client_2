@@ -37,6 +37,17 @@
             android:textSize="12sp"
             tools:text="银联"/>
 
+    <TextView
+            android:id="@+id/bankDef"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            tools:text="默认"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     <ImageView
             android:id="@+id/bankBgIcon"
             android:layout_width="wrap_content"

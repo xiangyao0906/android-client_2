@@ -31,6 +31,7 @@ class BankCardAdapter(context: Context): BaseRecyclerViewAdapter<BankBean, BankC
         holder.itemView.bankType.text = "储蓄卡"
         //银行卡
         holder.itemView.bankCode.text = "**** **** **** ".plus(model.bankCode.substring(12..15))
+        holder.itemView.bankDef.text = if (model.flag == 1)"默认" else ""
 
         when(model.bankName) {
             "中国银行" -> { //boc

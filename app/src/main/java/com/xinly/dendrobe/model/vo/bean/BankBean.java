@@ -10,6 +10,15 @@ public class BankBean {
     private String openingBank; //开户银行
     private String openingPhone; //开户手机号
     private String openingName; //开户名称
+    private int flag; // 1默认
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public int getId() {
         return id;

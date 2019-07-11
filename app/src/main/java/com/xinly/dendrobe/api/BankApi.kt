@@ -28,12 +28,27 @@ class BankApi {
         //请求用户银行卡
         @POST("api/user/bank/list/get")
         fun get(@Body requestBody: RequestBody): Observable<BaseResp<BankListData>>
+        //删除银行卡
+        @POST("api/user/bank/list/del")
+        fun del(@Body requestBody: RequestBody): Observable<BaseResp<Nothing>>
     }
 
     private val api: Api
 
     init {
         api = XinlyRequestManager.getRequest(Api::class.java)
+    }
+
+    /**
+     * 删除银行卡
+     */
+    fun del(id: Int, subscriberHelper: BaseSubscriber<BaseResp<Nothing>>, lifecycleProvider: LifecycleProvider<*>) {
+        val params = HashMap<String, Int>()
+        params["id"] = id
+
+        api.del(BaseRequestBody(params).toRequestBody())
+            .handleResult()
+            .execute(subscriberHelper, lifecycleProvider)
     }
 
     /**

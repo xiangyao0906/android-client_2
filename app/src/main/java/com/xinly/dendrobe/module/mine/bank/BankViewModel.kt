@@ -49,11 +49,11 @@ class BankViewModel(application: Application): BaseToolBarViewModel(application)
         toolBarData.rightText = if(bankIsEmpty.get()) "" else "添加"
     }
 
-    //添加银行卡
+    //添加银行卡事件
     override fun handRightText() {
         startActivity(AddBankActivity::class.java)
     }
-    //添加银行卡
+    //添加银行卡事件
     val addBankClick: BindingCommand<Nothing> = BindingCommand(object : BindingAction {
         override fun call() {
             startActivity(AddBankActivity::class.java)

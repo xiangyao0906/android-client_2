@@ -8,8 +8,11 @@ import com.xinly.dendrobe.BR
 import com.xinly.dendrobe.R
 import com.xinly.dendrobe.base.BaseRecyclerViewAdapter
 import com.xinly.dendrobe.databinding.BankBinding
+import com.xinly.dendrobe.model.constans.Constans
 import com.xinly.dendrobe.model.vo.bean.BankBean
+import com.xinly.dendrobe.util.PrefsUtils
 import com.xinly.dendrobe.widget.SpaceItemDecoration
+import com.xinly.dendrobe.widget.bottomview.BankCardBottomView
 
 /**
  * 银行卡
@@ -32,7 +35,7 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
         mAdapter = BankCardAdapter(this)
         mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<BankBean>{
             override fun onItemClick(item: BankBean, position: Int) {
-                showBottomDialog(item.id)
+                showBottomDialog(item, position)
             }
 
         })
@@ -50,7 +53,16 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
             bankList.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     binding.refreshLayout.isRefreshing = false
+                    val defId = PrefsUtils.getInt(Constans.SP_USER_DEF_BANK_CARD)
                     bankList.get()?.let {
+                        it.forEach { item ->
+                            if (item.id == defId){
+                                item.flag = 1
+                            }
+                        }
+                        it.sortByDescending { bankBean ->
+                            bankBean.flag
+                        }
                         bankIsEmpty.set(it.size==0)
                         mAdapter.setData(it)
                     }
@@ -67,6 +79,22 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
     }
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    private fun showBottomDialog(bankCardId: Int) {
+    private fun showBottomDialog(item: BankBean, position: Int) {
+        object : BankCardBottomView(this, item){
+            override fun deleteBankCard() {
+                mAdapter.notifyItemRemoved(position)
+            }
+
+            override fun setDefaultBankCard() {
+                PrefsUtils.putInt(Constans.SP_USER_DEF_BANK_CARD, item.id)
+                val newList: List<BankBean> = mAdapter.dataList.map {
+                    it.apply {
+                        flag = if (id == item.id) 1 else 0
+                    }
+                }.sortedByDescending { it.flag }
+                mAdapter.setData(newList as MutableList<BankBean>)
+            }
+
+        }.showBottomView(true)
     }
 }
