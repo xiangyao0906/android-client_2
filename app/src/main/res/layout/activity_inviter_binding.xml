@@ -39,7 +39,7 @@
                     android:textColor="@color/font_black"
                     android:textSize="15sp"
                     android:singleLine="true"
-                    android:hint="请输入推荐人ID"
+                    android:hint="请输入邀请人ID"
                     android:background="@null"/>
         </LinearLayout>
 

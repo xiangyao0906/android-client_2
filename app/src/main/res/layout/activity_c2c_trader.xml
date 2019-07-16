@@ -11,5 +11,13 @@
             tools:context=".module.trader.C2CTraderActivity">
 
         <include layout="@layout/layout_toolbar" bind:toolBar="@{viewModel}"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/bg_btn_black">
+
+
+        </LinearLayout>
     </LinearLayout>
 </layout>

@@ -76,14 +76,15 @@ class BankActivity : BaseActivity<BankBinding, BankViewModel>() {
         val defId = PrefsUtils.getInt(Constans.SP_USER_DEF_BANK_CARD)
         // 默认银行卡标志
         val defFlag = newList.any { defId == it.id }
-        if (!defFlag) {
-            newList.first().flag = 1
-            PrefsUtils.putInt(Constans.SP_USER_DEF_BANK_CARD, newList.first().id)
-        }else{
-            newList.first { defId == it.id }.flag = 1
+        return newList.apply {
+            if (!defFlag) {
+                first().flag = 1
+                PrefsUtils.putInt(Constans.SP_USER_DEF_BANK_CARD, first().id)
+            }else{
+                first { defId == it.id }.flag = 1
+            }
+            sortByDescending { it.flag }
         }
-        newList.sortByDescending { it.flag }
-        return newList
     }
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")

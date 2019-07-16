@@ -12,6 +12,7 @@ import com.xinly.dendrobe.databinding.C2CTraderBinding
  * Create by zm on 2019/7/8.
  */
 class C2CTraderActivity : BaseActivity<C2CTraderBinding, C2CTraderViewModel>() {
+
     override fun initContentViewId(savedInstanceState: Bundle?): Int {
         return R.layout.activity_c2c_trader
     }
